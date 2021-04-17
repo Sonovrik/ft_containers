@@ -5,23 +5,16 @@
 #include "../utils/utils.hpp"
 
 namespace ft {
-	// template <typename T>
-	// struct		Node {
-	// 	T				_value;
-	// 	Node			*_next;
-	// 	Node			*_prev;
-	// };
 
 	template <class T, class Alloc = std::allocator<T> > class list {
 	public:
-
 		typedef Alloc											allocator_type;
 		typedef	T												value_type;
 		typedef typename allocator_type::reference				reference;
 		typedef typename allocator_type::const_reference		const_reference;
 		typedef typename allocator_type::pointer				pointer;
 		typedef typename allocator_type::const_pointer			const_pointer;
-		// typedef iterator				allocator_t;
+//		 typedef iterator				allocator_t;
 		// typedef const_iterator				allocator_t;
 		// typedef reverse_iterator				allocator_t;
 		// typedef const_reverse_iterator				allocator_t;
@@ -31,20 +24,21 @@ namespace ft {
 
 		typedef std::allocator< Node<value_type> > nodeAllocator_t;
 
-
 		explicit list(const allocator_type &alloc = allocator_type()):
 			_allocator(alloc),
 			_size(0){
-			this->_last = this->_nodeAllocator.allocate(1);
-			this->_last->_next = NULL;
-			this->_last->_prev = NULL;
-			this->_first = this->_last;
+		    this->_root = this->_nodeAllocator.allocate(1);
+            this->_root->_next = NULL;
+            this->_root->_prev = NULL;
 		}
 
 		explicit list(size_type n, const value_type &val = value_type(),
 			const allocator_type &alloc = allocator_type()):
 				_allocator(alloc),
 				_size(0){
+                this->_root = this->_nodeAllocator.allocate(1);
+                this->_root->_next = NULL;
+                this->_root->_prev = NULL;
 				for (size_t i = 0; i < n; ++i)
 					push_back(val);
 		}
@@ -59,16 +53,8 @@ namespace ft {
 
 
 		~list(){
-			if (empty())
-				return;
-			Node<value_type> *tmp = this->_first;
-			while (tmp->_next != NULL){
-				this->_size--;
-				tmp = tmp->_next;
-				delete tmp->_prev;
-			}
-			delete tmp;
-			this->_size--;
+            clear();
+            delete this->_root;
 		}
 
 		// list &operator=(const list &x);
@@ -97,25 +83,25 @@ namespace ft {
 			return this->_size;
 		}
 
-		size_type max_size() const{ // ???
+		size_type max_size() const{
 			return size_type(-1) / sizeof(value_type);
 		}
 
 		// Element access
 		reference front(){
-			return this->_first->_value;
+			return this->_root->_next->_value;
 		}
 
 		const_reference front() const{
-			return this->_first->_value;
+            return this->_root->_next->_value;
 		}
 
 		reference back(){
-			return this->_last->_value;
+            return this->_root->_prev->_value;
 		}
 
 		const_reference back() const{
-			return this->_last->_value;
+            return this->_root->_prev->_value;
 		}
 
 		// Modifiers
@@ -124,39 +110,43 @@ namespace ft {
 				_insertBeginning(val);
 			else{
 				Node<value_type> *newNode = _createNode(val);
-				this->_last->_next = newNode;
-				newNode->_prev = this->_last;
-				this->_last = newNode;
-				this->_size++;
+				newNode->_prev = this->_root->_prev;
+                this->_root->_prev->_next = newNode;
+
+                newNode->_next = this->_root;
+                this->_root->_prev = newNode;
+                this->_size++;
 			}
 		}
 
 		void push_front (const value_type& val){
-			if (this->size == 0)
-				_insertBeginning(val);
-			else{
-				Node<value_type> *newNode = _createNode(val);
-				this->_first->_prev = newNode;
-				newNode->_next = this->_first;
-				this->_first = newNode;
-				this->_size++;
-			}
+            if (this->_size == 0)
+                _insertBeginning(val);
+            else{
+                Node<value_type> *newNode = _createNode(val);
+                newNode->_next = this->_root->_next;
+                this->_root->_next->_prev = newNode;
+
+                newNode->_prev = this->_root;
+                this->_root->_next = newNode;
+                this->_size++;
+            }
 		}
 
-		void pop_front(){ // ub
-			Node<value_type> *tmp = this->_first;
-			this->_first = this->_first->_next;
-			this->_first->_prev = NULL;
+		void pop_front(){
+            Node<value_type> *tmp = this->_root->_next;
+            tmp->_next->_prev = this->_root;
+            this->_root->_next = tmp->_next;
 			this->_size--;
 			delete tmp;
 		}
 
-		void pop_back(){ // ub
-			Node<value_type> *tmp = this->_last;
-			this->_last = this->_last->_prev;
-			this->_last->_next = NULL;
-			this->_size--;
-			delete tmp;
+		void pop_back(){
+            Node<value_type> *tmp = this->_root->_prev;
+            tmp->_prev->_next = this->_root;
+            this->_root->_prev = tmp->_prev;
+            this->_size--;
+            delete tmp;
 		}
 
 		// iterator insert (iterator position, const value_type& val);
@@ -166,19 +156,42 @@ namespace ft {
 		// iterator erase (iterator position);
 		// iterator erase (iterator first, iterator last);
 		// void swap (list& x);
-		// void resize (size_type n, value_type val = value_type());
+//		void resize (size_type n, value_type val = value_type()){
+//		    if (this->_size <= n){
+//		        while (this->_size != n)
+//                    push_back(val);
+//		    }
+//		    else{
+//                Node<value_type> *tmp = this->_root->_next;
+//                size_t i = 0;
+//                while (i != n){
+//                    tmp = tmp->_next;
+//                    i++;
+//                }
+//                this->_root->_prev = tmp;
+//                Node<value_type> *tmp2;
+//                while (tmp != this->_root){
+//                    tmp2 = tmp;
+//                    tmp = tmp->_next;
+//                    delete tmp2;
+//                    this->_size--;
+//                }
+//            }
+//		}
 		
 		void clear(){
 			if (empty())
 				return;
-			Node<value_type> *tmp = this->_first;
-			while (tmp->_next != NULL){
-				this->_size--;
-				tmp = tmp->_next;
-				delete tmp->_prev;
+			Node<value_type> *tmp = this->_root->_next;
+			Node<value_type> *tmp2;
+			while (tmp != this->_root){
+			    tmp2 = tmp;
+			    tmp = tmp->_next;
+			    delete tmp2;
+			    this->_size--;
 			}
-			delete tmp;
-			this->_size--;
+			this->_root->_next = NULL;
+			this->_root->_prev = NULL;
 		}
 
 		
@@ -187,16 +200,14 @@ namespace ft {
 	
 		void assign (size_type n, const value_type& val){
 			clear();
+			delete this->_root;
 			this = list(n, val);
 		}
 
 	private:
-
-
 		nodeAllocator_t _nodeAllocator;
 		allocator_type _allocator;
-		Node<value_type> *_first;
-		Node<value_type> *_last;
+		Node<value_type> *_root;
 		size_t _size;
 		
 		
@@ -210,9 +221,9 @@ namespace ft {
 		}
 
 		void				_insertBeginning(const value_type &val = value_type()){
-			this->_first = _createNode(val);
-			this->_last = this->_first;
-			this->_size++;
+            this->_root->_next = _createNode(val);
+            this->_root->_prev = this->_root->_next;
+            this->_size++;
 		}
 	};
 

@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/lmidori/Desktop/ft_containers/list/list.hpp
+iostream
+-
+../utils/utils.hpp
+/Users/lmidori/Desktop/ft_containers/utils/utils.hpp
+
+/Users/lmidori/Desktop/ft_containers/list/main.cpp
+list.hpp
+/Users/lmidori/Desktop/ft_containers/list/list.hpp
+unistd.h
+-
+
+/Users/lmidori/Desktop/ft_containers/utils/utils.hpp
+
