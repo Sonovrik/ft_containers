@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "../utils/utils.hpp"
+#include "../utils/iterators.hpp"
+
 
 namespace ft {
 
@@ -14,12 +16,12 @@ namespace ft {
 		typedef typename allocator_type::const_reference		const_reference;
 		typedef typename allocator_type::pointer				pointer;
 		typedef typename allocator_type::const_pointer			const_pointer;
-//		 typedef iterator				allocator_t;
+		 typedef ListIterator<T>								iterator;
 		// typedef const_iterator				allocator_t;
 		// typedef reverse_iterator				allocator_t;
-		// typedef const_reverse_iterator				allocator_t;
+		// typedef const_reverse_iterator		allocator_t;
 		// typedef difference_type				allocator_t;
-		typedef size_t				size_type;
+		typedef size_t							size_type;
 
 
 		typedef std::allocator< Node<value_type> > nodeAllocator_t;
@@ -27,18 +29,18 @@ namespace ft {
 		explicit list(const allocator_type &alloc = allocator_type()):
 			_allocator(alloc),
 			_size(0){
-		    this->_root = this->_nodeAllocator.allocate(1);
-            this->_root->_next = NULL;
-            this->_root->_prev = NULL;
+			this->_root = this->_nodeAllocator.allocate(1);
+			this->_root->_next = NULL;
+			this->_root->_prev = NULL;
 		}
 
 		explicit list(size_type n, const value_type &val = value_type(),
 			const allocator_type &alloc = allocator_type()):
 				_allocator(alloc),
 				_size(0){
-                this->_root = this->_nodeAllocator.allocate(1);
-                this->_root->_next = NULL;
-                this->_root->_prev = NULL;
+				this->_root = this->_nodeAllocator.allocate(1);
+				this->_root->_next = NULL;
+				this->_root->_prev = NULL;
 				for (size_t i = 0; i < n; ++i)
 					push_back(val);
 		}
@@ -53,8 +55,8 @@ namespace ft {
 
 
 		~list(){
-            clear();
-            delete this->_root;
+			clear();
+			delete this->_root;
 		}
 
 		// list &operator=(const list &x);
@@ -97,11 +99,11 @@ namespace ft {
 		}
 
 		reference back(){
-            return this->_root->_prev->_value;
+			return this->_root->_prev->_value;
 		}
 
 		const_reference back() const{
-            return this->_root->_prev->_value;
+			return this->_root->_prev->_value;
 		}
 
 		// Modifiers

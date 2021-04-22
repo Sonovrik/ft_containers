@@ -11,12 +11,22 @@ iostream
 -
 ../utils/utils.hpp
 /Users/lmidori/Desktop/ft_containers/utils/utils.hpp
+../utils/iterators.hpp
+/Users/lmidori/Desktop/ft_containers/utils/iterators.hpp
 
 /Users/lmidori/Desktop/ft_containers/list/main.cpp
 list.hpp
 /Users/lmidori/Desktop/ft_containers/list/list.hpp
 unistd.h
 -
+list
+-
+
+/Users/lmidori/Desktop/ft_containers/utils/iterators.hpp
+iostream
+-
+./utils.hpp
+/Users/lmidori/Desktop/ft_containers/utils/utils.hpp
 
 /Users/lmidori/Desktop/ft_containers/utils/utils.hpp
 

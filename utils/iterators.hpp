@@ -1,38 +1,63 @@
 
 #include <iostream>
+#include "./utils.hpp"
 
-template<class T>
-class   input_iterator{
-
-private:
+namespace ft {
 
 
+	class bidirectional_iterator_tag { };
 
-public:
+	template<typename T>
+	class ListIterator : public bidirectional_iterator_tag {
 
-    input_iterator &operator=(input_iterator const &);
-    bool &operator==(input_iterator const &);
-    bool &operator!=(input_iterator const &);
-    input_iterator &operator*(input_iterator const &);
-    input_iterator &operator->(input_iterator const &);
-    input_iterator &operator++(input_iterator const &);
+	public:
+		typedef T					value_type;
+		typedef value_type*			pointer;
+		typedef value_type const *	const_pointer;
+		typedef value_type &		reference;
+		typedef value_type const &	const_reference;
+		typedef Node<T>				node;
+		typedef node*				node_pointer;
+
+
+	private:
+		node_pointer	_ptr;
+
+
+	public:
+		ListIterator(): _ptr(NULL){}
+		ListIterator(ListIterator const &other): _ptr(other._ptr){}
+		~ListIterator(){}
+
+		ListIterator	&operator=(ListIterator const &other){
+			if (this != &other)
+				this->_ptr = other._ptr;
+			return NULL;
+		}
+
+		ListIterator &operator++() {
+			this->_ptr = this->_ptr->_next;
+			return *this;
+		}
+
+		ListIterator operator++(int) {
+			ListIterator tmp(*this);
+			this->_ptr = this->_ptr->_next;
+			return tmp;
+		}
+
+		bool	operator==(ListIterator const &other){
+			return (this->_ptr == other._ptr); // ???
+		}
+
+		bool	operator!=(ListIterator<T> const &other){
+			return (this->_ptr != other._ptr); // ???
+		}
+
+		bool 	operator*(ListIterator<T> const &other){}
+
+	};
+
+
 
 };
-
-
-template <class Category, class T, class Distance = ptrdiff_t,
-		class Pointer = T*, class Reference = T& > class iterator {
-
-private:
-
-
-public:
-
-		typedef T			value_type;
-		typedef Distance	difference_type;
-		typedef Pointer		pointer;
-		typedef Reference	reference;
-		typedef Category	iterator_category;
-
-};
-
