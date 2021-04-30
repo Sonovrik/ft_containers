@@ -90,7 +90,16 @@
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/list/main.cpp">
 			<Option target="ft_containers"/>
 		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/utils/const_iterator.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/utils/const_reverse_iterator.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/utils/iterators.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/utils/reverse_iterator.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/utils/utils.hpp">

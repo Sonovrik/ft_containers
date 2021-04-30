@@ -4,5 +4,8 @@
 CMakeFiles/ft_containers.dir/list/main.cpp.o
  /Users/lmidori/Desktop/ft_containers/list/list.hpp
  /Users/lmidori/Desktop/ft_containers/list/main.cpp
+ /Users/lmidori/Desktop/ft_containers/utils/const_iterator.hpp
+ /Users/lmidori/Desktop/ft_containers/utils/const_reverse_iterator.hpp
  /Users/lmidori/Desktop/ft_containers/utils/iterators.hpp
+ /Users/lmidori/Desktop/ft_containers/utils/reverse_iterator.hpp
  /Users/lmidori/Desktop/ft_containers/utils/utils.hpp

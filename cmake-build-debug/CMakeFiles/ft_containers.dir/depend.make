@@ -3,6 +3,9 @@
 
 CMakeFiles/ft_containers.dir/list/main.cpp.o: ../list/list.hpp
 CMakeFiles/ft_containers.dir/list/main.cpp.o: ../list/main.cpp
+CMakeFiles/ft_containers.dir/list/main.cpp.o: ../utils/const_iterator.hpp
+CMakeFiles/ft_containers.dir/list/main.cpp.o: ../utils/const_reverse_iterator.hpp
 CMakeFiles/ft_containers.dir/list/main.cpp.o: ../utils/iterators.hpp
+CMakeFiles/ft_containers.dir/list/main.cpp.o: ../utils/reverse_iterator.hpp
 CMakeFiles/ft_containers.dir/list/main.cpp.o: ../utils/utils.hpp
 

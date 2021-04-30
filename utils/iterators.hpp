@@ -11,28 +11,28 @@ namespace ft {
 	class ListIterator : public bidirectional_iterator_tag {
 
 	public:
-		typedef T					value_type;
-		typedef value_type*			pointer;
-		typedef value_type const *	const_pointer;
-		typedef value_type &		reference;
-		typedef value_type const &	const_reference;
-		typedef Node<T>				node;
-		typedef node*				node_pointer;
+		typedef T							value_type;
+		typedef value_type&					reference;
+		typedef const value_type&			const_reference;
+		typedef Node<T>*					pointer;
+		typedef Node<T> const *				const_pointer;
+		typedef typename std::ptrdiff_t		difference_type;
 
 
 	private:
-		node_pointer	_ptr;
+		pointer	_ptr;
 
 
 	public:
 		ListIterator(): _ptr(NULL){}
 		ListIterator(ListIterator const &other): _ptr(other._ptr){}
+		ListIterator(pointer ptr): _ptr(ptr){}
 		~ListIterator(){}
 
 		ListIterator	&operator=(ListIterator const &other){
 			if (this != &other)
 				this->_ptr = other._ptr;
-			return NULL;
+			return *this;
 		}
 
 		ListIterator &operator++() {
@@ -46,15 +46,38 @@ namespace ft {
 			return tmp;
 		}
 
+		ListIterator &operator--() {
+			this->_ptr = this->_ptr->_prev;
+			return *this;
+		}
+
+		ListIterator operator--(int) {
+			ListIterator tmp(*this);
+			this->_ptr = this->_ptr->_prev;
+			return tmp;
+		}
+
 		bool	operator==(ListIterator const &other){
-			return (this->_ptr == other._ptr); // ???
+			return (this->_ptr == other._ptr);
 		}
 
-		bool	operator!=(ListIterator<T> const &other){
-			return (this->_ptr != other._ptr); // ???
+		bool	operator!=(ListIterator const &other){
+			return (this->_ptr != other._ptr);
 		}
 
-		bool 	operator*(ListIterator<T> const &other){}
+		reference 	operator*(){
+			return this->_ptr->_value;
+		}
+
+		pointer operator->(){
+			return this->_ptr;
+		}
+
+		pointer operator->() const{
+			return this->_ptr;
+		}
+
+
 
 	};
 

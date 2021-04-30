@@ -10,4 +10,7 @@ add_executable(ft_containers
         list/list.hpp
         list/main.cpp
         utils/iterators.hpp
-        utils/utils.hpp)
+        utils/utils.hpp
+        utils/const_iterator.hpp
+        utils/reverse_iterator.hpp
+        utils/const_reverse_iterator.hpp)

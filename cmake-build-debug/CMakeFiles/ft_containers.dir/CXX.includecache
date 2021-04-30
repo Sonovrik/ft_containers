@@ -13,6 +13,12 @@ iostream
 /Users/lmidori/Desktop/ft_containers/utils/utils.hpp
 ../utils/iterators.hpp
 /Users/lmidori/Desktop/ft_containers/utils/iterators.hpp
+../utils/const_iterator.hpp
+/Users/lmidori/Desktop/ft_containers/utils/const_iterator.hpp
+../utils/reverse_iterator.hpp
+/Users/lmidori/Desktop/ft_containers/utils/reverse_iterator.hpp
+../utils/const_reverse_iterator.hpp
+/Users/lmidori/Desktop/ft_containers/utils/const_reverse_iterator.hpp
 
 /Users/lmidori/Desktop/ft_containers/list/main.cpp
 list.hpp
@@ -22,11 +28,29 @@ unistd.h
 list
 -
 
+/Users/lmidori/Desktop/ft_containers/utils/const_iterator.hpp
+iostream
+-
+./utils.hpp
+/Users/lmidori/Desktop/ft_containers/utils/utils.hpp
+
+/Users/lmidori/Desktop/ft_containers/utils/const_reverse_iterator.hpp
+iostream
+-
+./utils.hpp
+/Users/lmidori/Desktop/ft_containers/utils/utils.hpp
+
 /Users/lmidori/Desktop/ft_containers/utils/iterators.hpp
 iostream
 -
 ./utils.hpp
 /Users/lmidori/Desktop/ft_containers/utils/utils.hpp
+
+/Users/lmidori/Desktop/ft_containers/utils/reverse_iterator.hpp
+utils.hpp
+/Users/lmidori/Desktop/ft_containers/utils/utils.hpp
+iostream
+-
 
 /Users/lmidori/Desktop/ft_containers/utils/utils.hpp
 
