@@ -1,4 +1,5 @@
 *.o
+.gradle
 a.out
 *.gch
 .vscode

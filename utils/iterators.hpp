@@ -1,9 +1,11 @@
+#pragma once
 
 #include <iostream>
-#include "./utils.hpp"
+#include "utils.hpp"
+#include "list.hpp"
+#include <memory>
 
 namespace ft {
-
 
 	class bidirectional_iterator_tag { };
 
@@ -11,13 +13,15 @@ namespace ft {
 	class ListIterator : public bidirectional_iterator_tag {
 
 	public:
+
+		friend class list<T>;
+
 		typedef T							value_type;
 		typedef value_type&					reference;
 		typedef const value_type&			const_reference;
 		typedef Node<T>*					pointer;
 		typedef Node<T> const *				const_pointer;
 		typedef typename std::ptrdiff_t		difference_type;
-
 
 	private:
 		pointer	_ptr;
@@ -57,11 +61,11 @@ namespace ft {
 			return tmp;
 		}
 
-		bool	operator==(ListIterator const &other){
+		bool	operator==(ListIterator const &other) const{
 			return (this->_ptr == other._ptr);
 		}
 
-		bool	operator!=(ListIterator const &other){
+		bool	operator!=(ListIterator const &other) const{
 			return (this->_ptr != other._ptr);
 		}
 
@@ -76,9 +80,6 @@ namespace ft {
 		pointer operator->() const{
 			return this->_ptr;
 		}
-
-
-
 	};
 
 

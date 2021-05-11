@@ -1,6 +1,8 @@
 
 #include <iostream>
 #include "./utils.hpp"
+#include "list.hpp"
+#include <memory>
 
 namespace ft {
 
@@ -8,6 +10,9 @@ namespace ft {
 	class ConstListIterator : public bidirectional_iterator_tag {
 
 	public:
+
+		friend class list<T>;
+
 		typedef const T					value_type;
 		typedef value_type&				reference;
 		typedef const value_type&		const_reference;
@@ -44,16 +49,16 @@ namespace ft {
 			return tmp;
 		}
 
-		bool	operator==(ConstListIterator const &other){
+		bool	operator==(ConstListIterator const &other) const{
 			return (this->_ptr == other._ptr); // ???
 		}
 
-		bool	operator!=(ListIterator<T> const &other){
-			return (this->_ptr != other._ptr); // ???
+		bool	operator!=(ConstListIterator const &other) const{
+			return (this->_ptr != other. _ptr); // ???
 		}
 
 		const_reference 	operator*() const{
-			return *(this->_ptr->_value);
+			return (this->_ptr->_value);
 		}
 
 		ConstListIterator &operator--() {
