@@ -110,13 +110,15 @@ namespace ft {
 
 		//		Iterators
 		iterator begin() {
-			iterator tmp(this->_root->_next);
-			return tmp;
+			if (empty())
+				return (iterator (this->_root));
+			return (iterator (this->_root->_next));
 		}
 
 		const_iterator begin() const {
-			const_iterator tmp(this->_root->_next);
-			return tmp;
+			if (empty())
+				return (const_iterator (this->_root));
+			return (const_iterator (this->_root->_next));
 		}
 
 		iterator end() {
@@ -130,22 +132,24 @@ namespace ft {
 		}
 
 		reverse_iterator rbegin() {
-			reverse_iterator tmp(this->_root->_prev);
-			return tmp;
+			if (empty())
+				return (reverse_iterator (this->_root));
+			return (reverse_iterator (this->_root->_prev));
 		}
 
 		const_reverse_iterator rbegin() const {
-			const_reverse_iterator tmp(this->_root->_prev);
-			return tmp;
+			if (empty())
+				return (const_reverse_iterator (this->_root));
+			return (const_reverse_iterator (this->_root->_prev));
 		}
 
 		reverse_iterator rend() {
-			reverse_iterator tmp(this->_root->_next);
+			reverse_iterator tmp(this->_root);
 			return tmp;
 		}
 
 		const_reverse_iterator rend() const {
-			const_reverse_iterator tmp(this->_root->_next);
+			const_reverse_iterator tmp(this->_root);
 			return tmp;
 		}
 
@@ -292,9 +296,14 @@ namespace ft {
 		}
 
 		void resize (size_type n, value_type val = value_type()){
-//			if (n > this->_size){
-//				f
-//			}
+			if (n > this->_size){
+				for (size_type i = this->_size; i < n; i++)
+					push_back(val);
+			}
+			else if (n < this->_size()){
+				for (size_type i = this->_size; i > n; i--)
+					pop_back();
+			}
 		}
 
 
@@ -332,6 +341,122 @@ namespace ft {
 			}
 		}
 
+
+		// Operations
+//		void splice (iterator position, list& x){
+//			if (!x.empty()){
+//				Node<value_type> *tmp = position._ptr->_prev;
+//				position._ptr->_prev = x._root->_prev;
+//				x._root->_prev->_next = position._ptr;
+//
+//
+//				tmp->_next = x._root->_next;
+//				x._root->_next->_prev = tmp;
+//
+//				x._root->_next = NULL;
+//				x._root->_prev = NULL;
+//				this->_size += x._size;
+//				x._size = 0;
+//			}
+//		}
+//
+//		void splice (iterator position, list& x, iterator i){
+//			if (!x.empty()){
+//
+//
+//
+//				x._size--;
+//				this->_size++;
+//			}
+//		}
+//
+//		void splice (iterator position, list& x, iterator first, iterator last){
+//			while (first != last){
+//
+//				x._size--;
+//				this->_size++;
+//				first++;
+//			}
+//		}
+
+
+		void reverse(){
+			if (!empty()){
+				iterator it = this->begin();
+				Node<value_type> *tmp = this->_root->_prev;
+				this->_root->_prev = this->_root->_next;
+				this->_root->_next = tmp;
+				while (it != this->end()){
+					itemswap(it._ptr->_prev, it._ptr->_next);
+					it--;
+				}
+			}
+		}
+
+		void remove (const value_type& val){
+			iterator it = this->begin();
+			while (it != this->end()){
+				if (it._ptr->_value == val)
+					it = _deleteOne(it);
+				else
+					it++;
+			}
+		}
+
+		template <class Predicate>
+		void remove_if (Predicate pred){
+			iterator it = this->begin();
+			while (it != this->end()){
+				if (pred(*it))
+					it = _deleteOne(it);
+				else
+					it++;
+			}
+		}
+
+		void unique(){
+			iterator it = this->begin();
+			value_type val;
+			while (it != this->end()){
+				val = *it;
+				it++;
+				while (*it == val && it != this->end()){
+					it = _deleteOne(it);
+				}
+			}
+		}
+
+		template <class BinaryPredicate>
+		void unique (BinaryPredicate binary_pred){
+			iterator it = this->begin();
+			value_type val;
+			while (it != this->end()){
+				val = *it;
+				it++;
+				while (binary_pred(val, *it) && it != this->end()){
+					it = _deleteOne(it);
+				}
+			}
+		}
+
+		void sort(){ // merge sort
+
+			size_type leftSize = this->_size / 2;
+			size_type rightSize = this->_size - leftSize;
+
+
+		}
+
+		template <class Compare>
+			void sort (Compare comp){
+
+		}
+
+		//		void merge (list& x){
+//
+//		}
+
+
 	private:
 		nodeAllocator_t _nodeAllocator;
 		allocator_type _allocator;
@@ -354,6 +479,16 @@ namespace ft {
 			this->_root->_next = tmp;
 			this->_root->_prev = tmp;
 			this->_size++;
+		}
+
+		iterator _deleteOne(iterator it){
+			Node<value_type> *tmp = it._ptr->_next;
+			it._ptr->_prev->_next = it._ptr->_next;
+			it._ptr->_next->_prev = it._ptr->_prev;
+
+			delete (it._ptr);
+			this->_size--;
+			return iterator(tmp);
 		}
 	};
 
