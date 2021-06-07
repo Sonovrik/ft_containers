@@ -2,7 +2,9 @@
 #include <unistd.h>
 //#include "../utils/utils.hpp"
 //#include "../utils/iterators.hpp"
-
+#include <stack>
+#include <vector>
+#include <map>
 #include <list>
 bool single_digit (const int& value) { return (value>10); }
 bool same_integral_part (int first, int second)
@@ -199,33 +201,45 @@ int main() {
 		std::cout << *it2 << " ";
 	}
 	std::cout << std::endl;
-	mylist2.unique(same_integral_part);
-	for (ft::list<int>::iterator it2 = mylist2.begin(); it2 != mylist2.end(); it2++){
-		std::cout << *it2 << " ";
-	}
+	//mylist2.unique(same_integral_part);
+	//mylist2.sort();
+//	for (ft::list<int>::iterator it2 = mylist2.begin(); it2 != mylist2.end(); it2++){
+//		std::cout << *it2 << " ";
+//	}
 	std::cout << std::endl;
 
 
-	std::list<int> lst;
-	for (int i = 3; i > 1; i--)
-		lst.push_back(i * 10);
-	for (int i = 3; i > 1; i--)
-		lst.push_back(i * 10);
-	for (int i = 3; i > 1; i--)
-		lst.push_back(i * 10);
-	for (int i = 0; i < 3; i++)
-		lst.push_back(1);
-	for (int i = 0; i < 3; i++)
-		lst.push_back(2);
+	ft::list<int> ml;
+	for (int i=1; i<=3; ++i)
+		ml.push_back(i*10);   // mylist2: 10 20 30
+	for (int i=1; i<=3; ++i)
+		ml.push_back(i*10);
+	for (int i=1; i<=3; ++i)
+		ml.push_back(i*10);
 
-	for (std::list<int>::iterator it2 = lst.begin(); it2 != lst.end(); it2++){
-		std::cout << *it2 << " ";
-	}
-	std::cout << std::endl;
-
-	lst.unique(same_integral_part);
-	for (std::list<int>::iterator it2 = lst.begin(); it2 != lst.end(); it2++){
-		std::cout << *it2 << " ";
-	}
-	std::cout << std::endl;
+//	ml.sort();
+	std::stack<int> t;
+	t.push(12);
+//	std::list<int> lst;
+//	for (int i = 3; i > 1; i--)
+//		lst.push_back(i * 10);
+//	for (int i = 3; i > 1; i--)
+//		lst.push_back(i * 10);
+//	for (int i = 3; i > 1; i--)
+//		lst.push_back(i * 10);
+//	for (int i = 0; i < 3; i++)
+//		lst.push_back(1);
+//	for (int i = 0; i < 3; i++)
+//		lst.push_back(2);
+//
+//	for (std::list<int>::iterator it2 = lst.begin(); it2 != lst.end(); it2++){
+//		std::cout << *it2 << " ";
+//	}
+//	std::cout << std::endl;
+//
+//	lst.unique(same_integral_part);
+//	for (std::list<int>::iterator it2 = lst.begin(); it2 != lst.end(); it2++){
+//		std::cout << *it2 << " ";
+//	}
+//	std::cout << std::endl;
 }

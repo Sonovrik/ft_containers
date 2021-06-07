@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "utils.hpp"
-
+#include "cmath"
 namespace ft {
 
 	template<class T>
@@ -440,17 +440,56 @@ namespace ft {
 		}
 
 		void sort(){ // merge sort
-
-			size_type leftSize = this->_size / 2;
-			size_type rightSize = this->_size - leftSize;
-
-
+			mergeSort(this->begin()._ptr);
 		}
 
-		template <class Compare>
-			void sort (Compare comp){
+		Node<value_type> *joinll(Node<value_type> *h1, Node<value_type> *h2){
+			if (h1 == this->_root)
+				return h2;
+			if (h2 == this->_root)
+				return h1;
 
+			Node<value_type> *head;
+			Node<value_type> *tail;
+
+			if (h1->_value <= h2->_value){
+				head = h1;
+				tail = h1;
+				h1 = h1->_next;
+			}
+			else{
+				head = h2;
+				tail = h2;
+				h2 = h2->_next;
+			}
+
+			while (h1 != this->_root && h2 != this->_root){
+				if (h1->_value <= h2->_value){
+					tail->_next = h1;
+					tail = h1;
+					h1 = h1->_next;
+				}
+				else{
+					tail->_next = h2;
+					tail = h2;
+					h2 = h2->_next;
+				}
+			}
+			if (h1 == this->_root){
+				tail->_next = h2;
+			}
+			else{
+				tail->_next = h1;
+			}
+			return head;
 		}
+
+
+
+//		template <class Compare>
+//			void sort (Compare comp){
+//
+//		}
 
 		//		void merge (list& x){
 //
@@ -490,6 +529,26 @@ namespace ft {
 			this->_size--;
 			return iterator(tmp);
 		}
+
+		Node<value_type> *mergeSort(Node<value_type> *head) {
+			if (head == this->_root || head->_next == this->_root)
+				return head;
+			Node<value_type> *slow = head;
+			Node<value_type> *fast = head->_next;
+			while (fast != this->_root && fast->_next != NULL){
+				slow = slow->_next;
+				fast = fast->_next->_next;
+			}
+
+			Node<value_type> *h2 = slow->_next;
+			slow->_next = this->_root;
+
+			head = mergeSort(head);
+			h2 = mergeSort(h2);
+
+			return joinll(head, h2);
+		}
+
 	};
 
 }

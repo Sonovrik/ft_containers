@@ -77,6 +77,10 @@ namespace ft {
 			return this->_ptr;
 		}
 
+		const_reference	operator*() const{
+			return *this->_ptr;
+		}
+
 		pointer operator->() const{
 			return this->_ptr;
 		}
