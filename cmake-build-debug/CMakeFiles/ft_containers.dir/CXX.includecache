@@ -6,13 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/Users/lmidori/Desktop/ft_containers/vector/ReverseVectorIterator.hpp
-iostream
--
+/Users/lmidori/Desktop/ft_containers/vector/ReverseIterator.hpp
 
 /Users/lmidori/Desktop/ft_containers/vector/VectorIterator.hpp
-iostream
--
 
 /Users/lmidori/Desktop/ft_containers/vector/main.cpp
 vector.hpp
@@ -23,10 +19,8 @@ vector
 /Users/lmidori/Desktop/ft_containers/vector/vector.hpp
 iostream
 -
-memory
--
 VectorIterator.hpp
 /Users/lmidori/Desktop/ft_containers/vector/VectorIterator.hpp
-ReverseVectorIterator.hpp
-/Users/lmidori/Desktop/ft_containers/vector/ReverseVectorIterator.hpp
+ReverseIterator.hpp
+/Users/lmidori/Desktop/ft_containers/vector/ReverseIterator.hpp
 

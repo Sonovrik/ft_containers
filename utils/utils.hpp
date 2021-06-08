@@ -10,7 +10,7 @@ struct		Node {
 };
 	template< typename S >
 	void	itemswap(S& var1, S& var2) {
-		S tmpvar = ;
+		S tmpvar = var1;
 		var1 = var2;
 		var2 = tmpvar;
 	}

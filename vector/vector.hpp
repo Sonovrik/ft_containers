@@ -1,29 +1,26 @@
 #pragma once
-
 #include <iostream>
-#include <memory>
 #include "VectorIterator.hpp"
-#include "ReverseVectorIterator.hpp"
+#include "ReverseIterator.hpp"
+
 namespace ft{
+
 	template < class T, class Alloc = std::allocator<T> >
 	class vector{
 	public:
-		typedef T value_type;
-		typedef size_t size_type;
-		typedef Alloc allocator_type;
-		typedef typename allocator_type::reference reference;
-		typedef typename allocator_type::const_reference const_reference;
-		typedef typename allocator_type::pointer pointer;
-		typedef typename allocator_type::const_pointer const_pointer;
-		typedef typename std::ptrdiff_t difference_type;
-		typedef VectorIterator<T> iterator;
-		typedef const VectorIterator<T>  const_iterator;
-		typedef ReverseVectorIterator<T> reverse_iterator;
+		typedef T											value_type;
+		typedef size_t										size_type;
+		typedef Alloc										allocator_type;
+		typedef typename allocator_type::reference			reference;
+		typedef typename allocator_type::const_reference	const_reference;
+		typedef typename allocator_type::pointer			pointer;
+		typedef typename allocator_type::const_pointer		const_pointer;
+		typedef typename std::ptrdiff_t						difference_type;
+		typedef VectorIterator<T>							iterator;
+		typedef ReverseIterator<iterator>					reverse_iterator;
+//		typedef const VectorIterator<T>  const_iterator;
 //		typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
 
-//		_allocator.destroy(&ptr->data);
-//		_node_alloc.deallocate(ptr, 1);
-//		_allocator.construct(&newNodePtr->data, val);
 		explicit vector(const allocator_type& alloc = allocator_type()):
 			_allocator(alloc),
 			_size(0),
@@ -61,7 +58,7 @@ namespace ft{
 //		}
 
 		reverse_iterator rbegin(){
-			return reverse_iterator(&this->_root[this->_size - 1]);
+			return reverse_iterator(iterator(&this->_root[this->_size - 1]));
 		}
 
 //		const_iterator rbegin() const{
@@ -78,7 +75,7 @@ namespace ft{
 //		}
 
 		reverse_iterator rend(){
-			return iterator(this->_root[0]);
+			return reverse_iterator(iterator(this->_root[0]));
 		}
 
 //		reverse_iterator rend() const{
@@ -174,7 +171,7 @@ namespace ft{
 		void push_back(const value_type& val){
 			if (this->_size < this->_guaranteed_capacity){
 				this->_allocator.construct(&this->_root[this->_size], val);
-				this->_size++;
+				++this->_size;
 			}
 			else {
 				size_type newSize = this->_guaranteed_capacity * 2;
@@ -190,14 +187,14 @@ namespace ft{
 				tmp[this->_size] = val;
 				this->_allocator.deallocate(this->_root, this->_size);
 				this->_root = tmp;
-				this->_size++;
+				++this->_size;
 				this->_guaranteed_capacity = newSize;
 			}
 		}
 
 		void pop_back(){
 			this->_allocator.destroy(&this->_root[this->size() - 1]);
-			this->_size--;
+			--this->_size;
 		}
 
 		void clear(){
@@ -239,10 +236,6 @@ namespace ft{
 		size_type _size;
 		size_type _guaranteed_capacity;
 		pointer _root;
-
-
-
 	};
-
 
 }

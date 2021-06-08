@@ -2,30 +2,24 @@
 #include <vector>
 
 int	main(){
-		ft::vector<int> first;
-		first.reserve(100);
+		ft::vector<int> asd;
+		asd.push_back(2);
+		ft::vector<int> asd2;
+		asd2.push_back(2);
+		for (int i = 0; i < 10; ++i)
+			asd2.push_back(i);
 
+		ft::vector<int>::reverse_iterator it = asd2.rbegin();
 
-		for (int i = 0; i < 10; i++)
-			first.push_back(i);
-
-		for (int i = 0; i < first.size(); i++)
-			std::cout << first[i] << "  ";
-
-		std::vector<int> a;
-		for (int i = 0; i < 10; i++)
-			a.push_back(i);
-		std::vector<int>::reverse_iterator j = a.rbegin();
-		for (; j != a.rend(); j++){
-			std::cout << "asd" << std::endl;
-		}
-//		ft::vector<int>::reverse_iterator it = first.rbegin();
-//
-//		for (; it != first.rend(); it++)
+//		for (int i = 0; i < 11; i++){
 //			std::cout << *it << std::endl;
-//		std::cout << std::endl;
-//		std::cout << it[3] << std::endl;
-//		for (int i = 0; i < first.size(); i++)
-//			std::cout << first[i] << "  ";
+//			it++;
+//		}
+		ft::vector<int>::reverse_iterator it2 = asd2.rbegin();
+
+		if (it == it2)
+			std::cout << "asd" << std::endl;
+
+
 
 }

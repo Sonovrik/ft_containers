@@ -6,6 +6,8 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 
 include_directories(list)
 include_directories(utils)
+include_directories(vector)
+
 
 add_executable(ft_containers
         list/list.hpp
@@ -17,4 +19,5 @@ add_executable(ft_containers
         utils/const_reverse_iterator.hpp
         vector/vector.hpp
         vector/main.cpp
-        vector/VectorIterator.hpp)
+        vector/VectorIterator.hpp
+        vector/ReverseIterator.hpp)

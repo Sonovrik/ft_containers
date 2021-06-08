@@ -46,6 +46,7 @@
 				<Compiler>
 					<Add directory="/Users/lmidori/Desktop/ft_containers/list"/>
 					<Add directory="/Users/lmidori/Desktop/ft_containers/utils"/>
+					<Add directory="/Users/lmidori/Desktop/ft_containers/vector"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
@@ -69,6 +70,7 @@
 				<Compiler>
 					<Add directory="/Users/lmidori/Desktop/ft_containers/list"/>
 					<Add directory="/Users/lmidori/Desktop/ft_containers/utils"/>
+					<Add directory="/Users/lmidori/Desktop/ft_containers/vector"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
@@ -100,6 +102,9 @@
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/utils/utils.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/vector/ReverseIterator.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/vector/VectorIterator.hpp">

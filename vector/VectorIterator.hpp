@@ -1,25 +1,21 @@
-
-#include <iostream>
+#pragma once
 
 namespace ft{
 
-	class random_access_iterator_tag { };
-
 	template<typename T>
-	class VectorIterator: public random_access_iterator_tag {
+	class VectorIterator {
 	public:
-
-		typedef T value_type;
-		typedef size_t size_type;
-		typedef  value_type& reference;
-		typedef  const value_type& const_reference;
-		typedef  value_type * pointer;
-		typedef  value_type const * const_pointer;
-		typedef typename std::ptrdiff_t difference_type;
+		typedef T							value_type;
+		typedef size_t						size_type;
+		typedef  value_type&				reference;
+		typedef  const value_type&			const_reference;
+		typedef  value_type *				pointer;
+		typedef  value_type const *			const_pointer;
+		typedef typename std::ptrdiff_t		difference_type;
+		typedef typename std::random_access_iterator_tag	iterator_category;
 
 	private:
 		pointer _ptr;
-
 
 	public:
 		VectorIterator(): _ptr(NULL) {}
@@ -37,24 +33,24 @@ namespace ft{
 		}
 
 		VectorIterator &operator++() {
-			this->_ptr++;
+			++this->_ptr;
 			return *this;
 		}
 
 		VectorIterator operator++(int) {
 			VectorIterator tmp(*this);
-			this->_ptr++;
+			++this->_ptr;
 			return tmp;
 		}
 
 		VectorIterator &operator--() {
-			this->_ptr--;
+			--this->_ptr;
 			return *this;
 		}
 
 		VectorIterator operator--(int) {
 			VectorIterator tmp(*this);
-			this->_ptr--;
+			--this->_ptr;
 			return tmp;
 		}
 
@@ -93,10 +89,6 @@ namespace ft{
 			tmp -= n;
 			return tmp;
 		}
-
-//		difference_type operator+(VectorIterator const &other) const{
-//			return (this->_ptr + other._ptr);
-//		}
 
 		difference_type operator-(VectorIterator const &other) const{
 			return (this->_ptr - other._ptr);
