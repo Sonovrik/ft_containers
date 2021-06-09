@@ -1,12 +1,20 @@
 #pragma once
 
+#include "ReverseIterator.hpp"
+
 namespace ft{
 
 	template<typename T>
 	class VectorIterator {
 	public:
-		typedef T							value_type;
+//		typedef typename iterator_traits<T*>::iterator_category iterator_category;
+//		typedef typename iterator_traits<T*>::value_type value_type;
+//		typedef typename iterator_traits<T*>::difference_type difference_type;
+//		typedef typename iterator_traits<T*>::pointer pointer;
+//		typedef typename iterator_traits<T*>::reference reference;
 		typedef size_t						size_type;
+
+		typedef T							value_type;
 		typedef  value_type&				reference;
 		typedef  const value_type&			const_reference;
 		typedef  value_type *				pointer;
@@ -22,6 +30,9 @@ namespace ft{
 
 		VectorIterator(VectorIterator const &other): _ptr(other._ptr){}
 
+		template <class Tm>
+		VectorIterator(VectorIterator<Tm> const &other): _ptr(other.operator->()){}
+
 		VectorIterator(pointer ptr): _ptr(ptr){}
 
 		virtual ~VectorIterator(){}
@@ -31,6 +42,13 @@ namespace ft{
 				this->_ptr = other._ptr;
 			return *this;
 		}
+
+//		template <class Tm>
+//		VectorIterator	&operator=(VectorIterator<Tm> const &other) {
+//			if (this != &other)
+//				this->_ptr = other._ptr;
+//			return *this;
+//		}
 
 		VectorIterator &operator++() {
 			++this->_ptr;
@@ -66,15 +84,15 @@ namespace ft{
 			return *(this->_ptr);
 		}
 
-		const_reference	operator*() const{
-			return *this->_ptr;
-		}
+//		const_reference	operator*() const{
+//			return *(this->_ptr);
+//		}
 
 		pointer operator->(){
 			return this->_ptr;
 		}
 
-		const_pointer operator->() const{
+		pointer operator->() const{
 			return this->_ptr;
 		}
 
@@ -124,9 +142,9 @@ namespace ft{
 			return (this->_ptr[n]);
 		}
 
-		const_reference operator[](size_type n) const{
-			return (this->_ptr[n]);
-		}
+//		const_reference operator[](size_type n) const{
+//			return (this->_ptr[n]);
+//		}
 	};
 
 

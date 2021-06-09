@@ -7,6 +7,7 @@
 
 namespace ft {
 
+	class bidirectional_iterator_tag { };
 
 	template<typename T>
 	class ListIterator : public bidirectional_iterator_tag {

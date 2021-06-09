@@ -18,15 +18,14 @@ namespace ft{
 		typedef typename std::ptrdiff_t						difference_type;
 		typedef VectorIterator<T>							iterator;
 		typedef ReverseIterator<iterator>					reverse_iterator;
-//		typedef const VectorIterator<T>  const_iterator;
-//		typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
+		typedef VectorIterator<const T>						const_iterator;
+		typedef std::reverse_iterator<const_iterator>		const_reverse_iterator;
 
 		explicit vector(const allocator_type& alloc = allocator_type()):
 			_allocator(alloc),
 			_size(0),
-			_guaranteed_capacity(1),
+			_guaranteed_capacity(0),
 			_root(nullptr){
-			this->_root = this->_allocator.allocate(this->_guaranteed_capacity);
 		}
 
 		vector& operator=(const vector& x){
@@ -53,34 +52,34 @@ namespace ft{
 			return iterator(&this->_root[0]);
 		}
 
-//		const_iterator begin() const{
-//			return const_iterator(&this->_root[0]);
-//		}
+		const_iterator begin() const{
+			return const_iterator(&this->_root[0]);
+		}
 
 		reverse_iterator rbegin(){
 			return reverse_iterator(iterator(&this->_root[this->_size - 1]));
 		}
 
-//		const_iterator rbegin() const{
-//			return const_iterator(&this->_root[0]);
-//		}
+		const_reverse_iterator rbegin() const{
+			return const_reverse_iterator(iterator(&this->_root[this->_size - 1]));
+		}
 
 
 		iterator end(){
-			return iterator(this->_root[this->_size - 1]);
+			return iterator(&this->_root[this->_size]);
 		}
 
-//		const_iterator end() const{
-//			return const_iterator(this->_root[this->_size - 1]);
-//		}
+		const_iterator end() const{
+			return const_iterator(&this->_root[this->_size - 1]);
+		}
 
 		reverse_iterator rend(){
-			return reverse_iterator(iterator(this->_root[0]));
+			return reverse_iterator(iterator(&this->_root[-1]));
 		}
 
-//		reverse_iterator rend() const{
-//			return const_iterator(this->_root[this->_size - 1]);
-//		}
+		const_reverse_iterator rend() const{
+			return const_reverse_iterator(iterator(&this->_root[-1]));
+		}
 
 		//Capacity
 		size_type max_size() const{
@@ -174,7 +173,11 @@ namespace ft{
 				++this->_size;
 			}
 			else {
-				size_type newSize = this->_guaranteed_capacity * 2;
+				size_type newSize;
+				if (!this->_guaranteed_capacity)
+					newSize = 1;
+				else
+					newSize = this->_guaranteed_capacity * 2;
 				if (this->max_size() < newSize)
 					throw std::bad_array_new_length();
 

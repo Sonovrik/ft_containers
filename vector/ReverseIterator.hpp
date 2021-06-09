@@ -11,6 +11,7 @@ namespace ft{
 		typedef typename Iterator::iterator_category	iterator_category;
 	};
 
+
 	template <class T>
 	class iterator_traits <T*>{
 	public:

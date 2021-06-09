@@ -220,6 +220,8 @@ int main() {
 //	ml.sort();
 	std::stack<int> t;
 	t.push(12);
+	ft::list<int>::iterator k = ml.begin();
+	ft::list<int>::const_iterator l = k;
 //	std::list<int> lst;
 //	for (int i = 3; i > 1; i--)
 //		lst.push_back(i * 10);
