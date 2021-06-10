@@ -4,47 +4,39 @@
 int	main() {
 
 	ft::vector<int> vec1;
-	ft::vector<std::string> vec3;
 	std::vector<int> vec2;
-	for (int i = 0; i < 16; ++i){
+
+	for (int i = 0; i < 10; i++){
 		vec1.push_back(i);
 		vec2.push_back(i);
 	}
 
-
 	ft::vector<int>::iterator it1 = vec1.begin();
-	ft::vector<int>::iterator it5 = vec1.begin();
 	std::vector<int>::iterator it2 = vec2.begin();
-	ft::vector<int>::reverse_iterator l = vec1.rbegin();
-	ft::vector<int>::const_reverse_iterator k = vec1.rbegin();
 
+
+	ft::vector<int>::const_iterator it3 = vec1.begin();
 	std::vector<int>::const_iterator it4 = vec2.begin();
 
-	ft::vector<int>::iterator it;
-	ft::vector<int>::const_iterator it3 = vec1.begin();
-//	it3 = it;
+	ft::vector<int>::reverse_iterator it5 = vec1.rbegin();
+	std::vector<int>::reverse_iterator it6 = vec2.rbegin();
 
-//	it2 = it4;
-//	it3 = it;
 
-	for(int i = 0; i < 10; ++i){
-		std::cout << *it4 << "  ";
-		it4++;
+	ft::vector<int>::const_reverse_iterator it7 = vec1.rbegin();
+	std::vector<int>::const_reverse_iterator it8 = vec2.rbegin();
+
+
+	it7 = it5;
+
+	for (; it7 != vec1.rend(); ++it7){
+		std::cout << *it7 << "  ";
 	}
 	std::cout << std::endl;
-	for(int i = 0; i < 10; ++i){
-		std::cout << *it3 << "  ";
-		it3++;
+
+	for (; it8 < vec2.rend(); ++it8){
+		std::cout << *it8 << "  ";
 	}
 	std::cout << std::endl;
-//	it2 = it4;
-//	it1 = it3;
-
-	it4 = it2;
-	it3 = it1;
-//	*it4 = 0;
-//	*it3 = 0;
-
 
 	return 0;
 }

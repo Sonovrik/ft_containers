@@ -16,10 +16,10 @@ namespace ft{
 		typedef typename allocator_type::pointer			pointer;
 		typedef typename allocator_type::const_pointer		const_pointer;
 		typedef typename std::ptrdiff_t						difference_type;
-		typedef VectorIterator<T>							iterator;
+		typedef VectorIterator<pointer, pointer>			iterator;
 		typedef ReverseIterator<iterator>					reverse_iterator;
-		typedef VectorIterator<const T>						const_iterator;
-		typedef std::reverse_iterator<const_iterator>		const_reverse_iterator;
+		typedef VectorIterator<const_pointer, pointer>		const_iterator;
+		typedef ReverseIterator<const_iterator>				const_reverse_iterator;
 
 		explicit vector(const allocator_type& alloc = allocator_type()):
 			_allocator(alloc),
@@ -57,28 +57,27 @@ namespace ft{
 		}
 
 		reverse_iterator rbegin(){
-			return reverse_iterator(iterator(&this->_root[this->_size - 1]));
+			return reverse_iterator(end());
 		}
 
 		const_reverse_iterator rbegin() const{
-			return const_reverse_iterator(iterator(&this->_root[this->_size - 1]));
+			return const_reverse_iterator(end());
 		}
-
 
 		iterator end(){
 			return iterator(&this->_root[this->_size]);
 		}
 
 		const_iterator end() const{
-			return const_iterator(&this->_root[this->_size - 1]);
+			return const_iterator(&this->_root[this->_size]);
 		}
 
 		reverse_iterator rend(){
-			return reverse_iterator(iterator(&this->_root[-1]));
+			return reverse_iterator(this->begin());
 		}
 
 		const_reverse_iterator rend() const{
-			return const_reverse_iterator(iterator(&this->_root[-1]));
+			return const_reverse_iterator(this->begin());
 		}
 
 		//Capacity
