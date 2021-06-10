@@ -3,6 +3,8 @@
 #include <iostream>
 #include "utils.hpp"
 #include "cmath"
+#include "../support_classes.hpp"
+
 namespace ft {
 
 	template<class T>
@@ -14,11 +16,6 @@ namespace ft {
 	template<class T>
 	class ConstReverseListIterator;
 
-	template <bool B, class T = void>
-	struct enable_if { };
-
-	template <class T>
-	struct enable_if<true, T> { typedef T type; };
 
 	template <class T, class Alloc = std::allocator<T> >
 	class list {
@@ -61,7 +58,7 @@ namespace ft {
 		template <class InputIterator>
 		list(InputIterator first, InputIterator last,
 			 const allocator_type &alloc = allocator_type(),
-			 typename enable_if<!std::numeric_limits<InputIterator>::is_specialized>::type * = 0) :
+			 typename enable_if<!std::numeric_limits<InputIterator>::is_specialized>::type * = NULL) :
 			 _allocator(alloc),
 			 _size(0){
 			this->_root = this->_nodeAllocator.allocate(1);
@@ -257,7 +254,7 @@ namespace ft {
 
 		 template <class InputIterator>
 		 void insert(iterator position, InputIterator first, InputIterator last,
-			   typename enable_if<!std::numeric_limits<InputIterator>::is_specialized>::type * = 0){
+			   typename enable_if<!std::numeric_limits<InputIterator>::is_specialized>::type * = NULL){
 			while (first != last){
 				position = insert(position, *first);
 				position++;
@@ -325,7 +322,7 @@ namespace ft {
 
 		 template <class InputIterator>
 		 	void assign (InputIterator first, InputIterator last,
-				 typename enable_if<!std::numeric_limits<InputIterator>::is_specialized>::type * = 0){
+				 typename enable_if<!std::numeric_limits<InputIterator>::is_specialized>::type * = NULL){
 			 clear();
 			 const_iterator it = first;
 			 while (it != last){

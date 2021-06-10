@@ -6,7 +6,11 @@
 
 #IncludeRegexTransform: 
 
+/Users/lmidori/Desktop/ft_containers/support_classes.hpp
+
 /Users/lmidori/Desktop/ft_containers/vector/ReverseIterator.hpp
+../support_classes.hpp
+/Users/lmidori/Desktop/ft_containers/support_classes.hpp
 
 /Users/lmidori/Desktop/ft_containers/vector/VectorIterator.hpp
 ReverseIterator.hpp

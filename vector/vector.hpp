@@ -25,7 +25,43 @@ namespace ft{
 			_allocator(alloc),
 			_size(0),
 			_guaranteed_capacity(0),
+			_root(NULL){
+		}
+
+		explicit vector (size_type n, const value_type& val = value_type(),
+						 const allocator_type& alloc = allocator_type()):
+						 _allocator(alloc),
+						 _size(0),
+						 _guaranteed_capacity(0),
+						 _root(NULL){
+			this->resize(n, val);
+		}
+
+		template <class InputIterator>
+		vector (InputIterator first, InputIterator last,
+				const allocator_type& alloc = allocator_type(),
+				typename enable_if<!std::numeric_limits<InputIterator>::is_specialized>::type * = NULL):
+				_allocator(alloc),
+				_size(0),
+				_guaranteed_capacity(0),
+				_root(NULL){
+			this->reserve(last - first);
+			while (first != last){
+				this->push_back(*first);
+				++first;
+			}
+		}
+
+		vector (const vector& x):
+			_allocator(x._allocator),
+			_size(0),
+			_guaranteed_capacity(0),
 			_root(nullptr){
+			this->reserve(x._guaranteed_capacity);
+			for (vector::iterator it = x.begin(); it != x.end(); ++it){
+				this->push_back(*it);
+			}
+
 		}
 
 		vector& operator=(const vector& x){
@@ -40,10 +76,10 @@ namespace ft{
 
 
 		~vector(){
-			if (!this->empty()){
+			if (this->_guaranteed_capacity != 0){
 				for (size_type i = 0; i < this->_size; ++i)
 					this->_allocator.destroy(&this->_root[i]);
-				this->_allocator.deallocate(this->_root, this->_size);
+				this->_allocator.deallocate(this->_root, this->_guaranteed_capacity);
 			}
 		}
 
@@ -166,6 +202,25 @@ namespace ft{
 		}
 
 		// Modifiers
+		template <class InputIterator>
+		void assign(InputIterator first, InputIterator last,
+					typename enable_if<!std::numeric_limits<InputIterator>::is_specialized>::type * = NULL){
+			clear();
+			this->reserve(last - first);
+			while (first != last){
+				push_back(*first);
+				++first;
+			}
+		}
+
+		void assign(size_type n, const value_type& val){
+			clear();
+			this->reserve(n);
+			for (size_type i = 0; i < n; ++i){
+				push_back(val);
+			}
+		}
+
 		void push_back(const value_type& val){
 			if (this->_size < this->_guaranteed_capacity){
 				this->_allocator.construct(&this->_root[this->_size], val);
@@ -186,7 +241,7 @@ namespace ft{
 					tmp[i] = this->_root[i];
 					this->_allocator.destroy(&this->_root[i]);
 				}
-				tmp[this->_size] = val;
+				this->_allocator.construct(&tmp[this->_size], val);
 				this->_allocator.deallocate(this->_root, this->_size);
 				this->_root = tmp;
 				++this->_size;
@@ -199,45 +254,104 @@ namespace ft{
 			--this->_size;
 		}
 
+		iterator insert(iterator position, const value_type& val){
+			return this->__insert(position, 1, val);
+		}
+
+		void insert(iterator position, size_type n, const value_type& val){
+			this->__insert(position, n, val);
+		}
+
+		template <class InputIterator>
+		void insert(iterator position, InputIterator first, InputIterator last,
+					 typename enable_if<!std::numeric_limits<InputIterator>::is_specialized>::type * = NULL){
+			if (first == last)
+				return ;
+			while (first != last){
+				position = this->__insert(position, 1, *first);
+				++position;
+				++first;
+			}
+		}
+
+		iterator erase(iterator position){
+			this->_allocator.destroy(position.base());
+			iterator it = position;
+			while (it != this->end()){
+				//
+			}
+		}
+
+		iterator erase(iterator first, iterator last){
+
+		}
+
 		void clear(){
-			if (!this->empty()){
-				for (size_type i = 0; i < this->_size; ++i)
-					this->_allocator.destroy(&this->_root[i]);
-				this->_allocator.deallocate(this->_root, this->_size);
-				this->_size = 0;
+			while (this->_size != 0){
+				this->pop_back();
 			}
 		}
 
 		void swap(vector& x){
-			pointer tmp = this->_root;
+			size_type tmp_size = this->_size;
+			size_type tmp_capacity = this->_guaranteed_capacity;
+			pointer tmp_root = this->_root;
+
+			this->_size = x._size;
+			this->_guaranteed_capacity = x._guaranteed_capacity;
 			this->_root = x._root;
-			x._root = tmp;
+
+			x._size = tmp_size;
+			x._guaranteed_capacity = tmp_capacity;
+			x._root = tmp_root;
 		}
-
-		void assign(size_type n, const value_type& val){
-			this->clear();
-			this->resize(n, val);
-		}
-
-		//		template <class InputIterator>
-//		void assign (InputIterator first, InputIterator last);
-
-//		iterator insert (iterator position, const value_type& val);
-
-//		void insert (iterator position, size_type n, const value_type& val);
-
-//		template <class InputIterator>
-//				void insert (iterator position, InputIterator first, InputIterator last);
-
-//		iterator erase (iterator position);
-
-//		iterator erase (iterator first, iterator last);
 
 	private:
 		allocator_type _allocator;
 		size_type _size;
 		size_type _guaranteed_capacity;
 		pointer _root;
+
+		iterator __insert(iterator position, size_type n, const value_type& val){
+			if (n == 0)
+				return position;
+			iterator iter = position;
+			size_type newSize = this->_size + n;
+			if (this->_guaranteed_capacity < newSize) {
+				if (this->_guaranteed_capacity * 2 > newSize)
+					newSize = this->_guaranteed_capacity  * 2;
+				vector tmp;
+				tmp.reserve(newSize);
+				iterator it = this->begin();
+				while (it != position){
+					tmp.push_back(*it);
+					++it;
+				}
+				iter = tmp.end();
+				for (size_type i = 0; i < n; ++i){
+					tmp.push_back(val);
+				}
+				while (it != this->end()){
+					tmp.push_back(*it);
+					++it;
+				}
+				this->swap(tmp);
+			}
+			else{
+				iterator it = this->end();
+				while (it != position){
+					--it;
+					this->_allocator.construct(it.base() + n, *it);
+					this->_allocator.destroy(it.base());
+				}
+				for (size_type i = 0; i < n; ++i){
+					this->_allocator.construct(it.base(), val);
+					++it;
+					++this->_size;
+				}
+			}
+			return iter;
+		}
 	};
 
 }

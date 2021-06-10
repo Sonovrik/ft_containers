@@ -20,4 +20,5 @@ add_executable(ft_containers
         vector/vector.hpp
         vector/main.cpp
         vector/VectorIterator.hpp
-        vector/ReverseIterator.hpp)
+        vector/ReverseIterator.hpp
+        support_classes.hpp)

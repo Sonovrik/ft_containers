@@ -4,14 +4,6 @@
 
 namespace ft{
 
-	template <class, class>
-	class check_if_the_same {};
-
-	template <class T>
-	class check_if_the_same<T, T>{
-		typedef T type;
-	};
-
 
 	template<typename T, typename NoneConstPointer>
 	class VectorIterator {
@@ -80,6 +72,10 @@ namespace ft{
 		}
 
 		pointer operator->(){
+			return this->_ptr;
+		}
+
+		pointer base(){
 			return this->_ptr;
 		}
 
