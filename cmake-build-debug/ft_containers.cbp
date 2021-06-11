@@ -86,25 +86,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/list/list.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/support_classes.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/utils/const_iterator.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/utils/const_reverse_iterator.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/utils/iterators.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/utils/reverse_iterator.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/utils/utils.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/vector/ReverseIterator.hpp">

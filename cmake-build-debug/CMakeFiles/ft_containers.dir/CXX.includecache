@@ -19,7 +19,19 @@ ReverseIterator.hpp
 /Users/lmidori/Desktop/ft_containers/vector/main.cpp
 vector.hpp
 /Users/lmidori/Desktop/ft_containers/vector/vector.hpp
+iostream
+-
+sstream
+-
+algorithm
+-
 vector
+-
+cstdlib
+-
+ctime
+-
+iomanip
 -
 
 /Users/lmidori/Desktop/ft_containers/vector/vector.hpp
