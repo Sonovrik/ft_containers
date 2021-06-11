@@ -16,7 +16,7 @@ namespace ft{
 		typedef typename iterator_traits<Iterator>::reference				reference;
 
 	private:
-		Iterator _it;
+		iterator_type _it;
 
 	public:
 		ReverseIterator(): _it(){}
@@ -134,8 +134,6 @@ namespace ft{
 			const ReverseIterator<Iterator>& rhs){
 		return (lhs - rhs);
 	}
-
-	//asd
 
 	template <class Iterator1, class Iterator2>
 	bool operator==(const ReverseIterator<Iterator1>& lhs,

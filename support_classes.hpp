@@ -40,6 +40,7 @@ namespace ft{
 
 	template <class T>
 	class check_if_the_same<T, T>{
+	public:
 		typedef T type;
 	};
 

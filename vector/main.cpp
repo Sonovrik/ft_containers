@@ -594,8 +594,16 @@ void		ft_vector_tests(int ac, char **av)
 
 
 int	main(int ac, char **av) {
-	ft::vector<int>		ass(7, 10);
-	ft::vector<int>		as(ass);
+	ft::vector<std::string>		ass;
+	ft::vector<std::string>		as(ass);
+	ft::vector<std::string>::reverse_iterator it1 = as.rbegin();
+	ft::vector<std::string>::const_reverse_iterator it2 = ass.rbegin();
+	if (it1 <= it2) {
+		std::cout << "asd" << std::endl;
+	}
+
+
+
 
 //	ft_vector_tests(ac,av);
 

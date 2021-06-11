@@ -22,11 +22,11 @@ namespace ft{
 
 		VectorIterator(VectorIterator const &other): _ptr(other._ptr){}
 
-		VectorIterator(pointer ptr): _ptr(ptr){}
+		explicit VectorIterator(const pointer ptr): _ptr(ptr){}
 
 		template <class Tm>
 		VectorIterator(VectorIterator<Tm, NoneConstPointer> const &other,
-					   typename ft::check_if_the_same<Tm, NoneConstPointer>* check = NULL):
+					   typename ft::check_if_the_same<Tm, NoneConstPointer>::type * check = NULL):
 			_ptr(other.base()) { (void)check;}
 
 
