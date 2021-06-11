@@ -65,14 +65,15 @@ namespace ft{
 		}
 
 		vector& operator=(const vector& x){
-			if (this == &x) {
+			if (this != &x) {
 				this->clear();
-				this->_allocator = x._allocator;
-				this->_size = x._size;
-				this->_guaranteed_capacity = x._guaranteed_capacity;
-				this->_root = this->_allocator.allocate(this->_guaranteed_capacity);
-				for (size_type i = 0; i < this->size(); ++i) {
-					this->push_back(x._root[i]);
+				if (this->_guaranteed_capacity < x.size()){
+					this->_allocator.deallocate(this->_root, this->_guaranteed_capacity);
+					this->_root = this->_allocator.allocate(x.size());
+					this->_guaranteed_capacity = x.size();
+				}
+				for (size_type i = 0; i < x.size(); ++i){
+					push_back(x[i]);
 				}
 			}
 			return *this;
@@ -156,7 +157,7 @@ namespace ft{
 
 		void resize(size_type n, value_type val = value_type()){
 			if (n > this->_size){
-				this->reserve(n);
+//				this->reserve(n);
 				for (size_type i = this->_size; i < n; i++)
 					this->push_back(val);
 			}
