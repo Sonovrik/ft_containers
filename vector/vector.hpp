@@ -245,8 +245,13 @@ namespace ft{
 			}
 		}
 
+
 		iterator insert(iterator position, const value_type& val){
 			return this->__insert(position, 1, val);
+		}
+
+		const_iterator insert(const_iterator position, const value_type& val){
+				return this->__insert(position, 1, val);
 		}
 
 		void insert(iterator position, size_type n, const value_type& val){
@@ -330,6 +335,46 @@ namespace ft{
 				vector tmp;
 				tmp.reserve(newSize);
 				iterator it = this->begin();
+				while (it != position){
+					tmp.push_back(*it);
+					++it;
+				}
+				iter = tmp.end();
+				for (size_type i = 0; i < n; ++i)
+					tmp.push_back(val);
+				while (it != this->end()){
+					tmp.push_back(*it);
+					++it;
+				}
+				this->swap(tmp);
+			}
+			else{
+				iterator it = this->end();
+				while (it != position){
+					--it;
+					this->_allocator.construct(it.base() + n, *it);
+					this->_allocator.destroy(it.base());
+				}
+				for (size_type i = 0; i < n; ++i){
+					this->_allocator.construct(it.base(), val);
+					++it;
+					++this->_size;
+				}
+			}
+			return iter;
+		}
+
+		const_iterator __insert(const_iterator position, size_type n, const value_type& val){
+			if (n == 0)
+				return position;
+			const_iterator iter = position;
+			size_type newSize = this->_size + n;
+			if (this->_guaranteed_capacity < newSize) {
+				if (this->_guaranteed_capacity * 2 > newSize)
+					newSize = this->_guaranteed_capacity  * 2;
+				vector tmp;
+				tmp.reserve(newSize);
+				const_iterator it = this->begin();
 				while (it != position){
 					tmp.push_back(*it);
 					++it;
