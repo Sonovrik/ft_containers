@@ -86,19 +86,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/support_classes.hpp">
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/list_test/list.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/vector/ReverseIterator.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/vector/VectorIterator.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/vector/main.cpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/vector/vector.hpp">
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/list_test/main.cpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/CMakeLists.txt">

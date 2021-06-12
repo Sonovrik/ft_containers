@@ -10,8 +10,11 @@ include_directories(vector)
 
 
 add_executable(ft_containers
-        vector/vector.hpp
-        vector/main.cpp
-        vector/VectorIterator.hpp
-        vector/ReverseIterator.hpp
-        support_classes.hpp)
+#        vector/vector.hpp
+#        vector/main.cpp
+#        vector/VectorIterator.hpp
+#        vector/ReverseIterator.hpp
+#        support_classes.hpp
+        list_test/list.hpp
+        list_test/main.cpp
+        )

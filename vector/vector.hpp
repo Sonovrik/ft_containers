@@ -9,8 +9,8 @@ namespace ft{
 	class vector{
 	public:
 		typedef T											value_type;
-		typedef size_t										size_type;
 		typedef Alloc										allocator_type;
+		typedef typename allocator_type::size_type			size_type;
 		typedef typename allocator_type::reference			reference;
 		typedef typename allocator_type::const_reference	const_reference;
 		typedef typename allocator_type::pointer			pointer;
