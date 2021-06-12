@@ -25,8 +25,7 @@ namespace ft{
 			_allocator(alloc),
 			_size(0),
 			_guaranteed_capacity(0),
-			_root(NULL){
-		}
+			_root(NULL) {}
 
 		explicit vector(size_type n, const value_type& val = value_type(),
 						 const allocator_type& alloc = allocator_type()):
@@ -34,7 +33,7 @@ namespace ft{
 						 _size(0),
 						 _guaranteed_capacity(0),
 						 _root(NULL){
-			this->resize(n, val);
+			this->assign(n, val);
 		}
 
 		template <class InputIterator>
@@ -58,10 +57,8 @@ namespace ft{
 			_guaranteed_capacity(0),
 			_root(nullptr){
 			this->reserve(x._guaranteed_capacity);
-			for (const_iterator it = x.begin(); it != x.end(); ++it){
+			for (const_iterator it = x.begin(); it != x.end(); ++it)
 				this->push_back(*it);
-			}
-
 		}
 
 		vector& operator=(const vector& x){
@@ -72,9 +69,8 @@ namespace ft{
 					this->_root = this->_allocator.allocate(x.size());
 					this->_guaranteed_capacity = x.size();
 				}
-				for (size_type i = 0; i < x.size(); ++i){
+				for (size_type i = 0; i < x.size(); ++i)
 					push_back(x[i]);
-				}
 			}
 			return *this;
 		}
@@ -142,12 +138,12 @@ namespace ft{
 			if (n <= this->_guaranteed_capacity)
 				return;
 			if (n > this->max_size())
-				throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
+				throw std::length_error("vector::reserve");
 			size_type newSize = n;
 			pointer tmp = this->_allocator.allocate(newSize);
 
 			for (size_type i = 0; i < this->_size; ++i){
-				tmp[i] = this->_root[i];
+				this->_allocator.construct(tmp + i, this->_root[i]);
 				this->_allocator.destroy(&this->_root[i]);
 			}
 			this->_allocator.deallocate(this->_root, this->_size);
@@ -157,8 +153,11 @@ namespace ft{
 
 		void resize(size_type n, value_type val = value_type()){
 			if (n > this->_size){
-//				this->reserve(n);
-				for (size_type i = this->_size; i < n; i++)
+				if (n > this->max_size())
+					throw std::bad_array_new_length();
+				if (n > this->_guaranteed_capacity)
+					reserve(n);
+				for (size_type i = this->_size; i < n; ++i)
 					this->push_back(val);
 			}
 			else if (n < this->size()){
@@ -170,11 +169,11 @@ namespace ft{
 
 		//Element access
 		reference operator[](size_type n){
-			return (this->_root[n]);
+			return this->_root[n];
 		}
 
 		const_reference operator[](size_type n) const{
-			return (this->_root[n]);
+			return this->_root[n];
 		}
 
 
@@ -221,42 +220,29 @@ namespace ft{
 		void assign(size_type n, const value_type& val){
 			clear();
 			this->reserve(n);
-			for (size_type i = 0; i < n; ++i){
+			for (size_type i = 0; i < n; ++i)
 				push_back(val);
-			}
 		}
 
 		void push_back(const value_type& val){
-			if (this->_size < this->_guaranteed_capacity){
-				this->_allocator.construct(&this->_root[this->_size], val);
-				++this->_size;
-			}
-			else {
-				size_type newSize;
+			if (this->_size == this->_guaranteed_capacity){
 				if (!this->_guaranteed_capacity)
-					newSize = 1;
-				else
-					newSize = this->_guaranteed_capacity * 2;
-				if (this->max_size() < newSize)
-					throw std::bad_array_new_length();
-
-				pointer tmp = this->_allocator.allocate(newSize);
-
-				for (size_type i = 0; i < this->_size; ++i){
-					tmp[i] = this->_root[i];
-					this->_allocator.destroy(&this->_root[i]);
+					this->reserve(1);
+				else{
+					if (this->_guaranteed_capacity * 2 > this->max_size())
+						throw std::bad_array_new_length();
+					this->reserve(this->_guaranteed_capacity * 2);
 				}
-				this->_allocator.construct(&tmp[this->_size], val);
-				this->_allocator.deallocate(this->_root, this->_size);
-				this->_root = tmp;
-				++this->_size;
-				this->_guaranteed_capacity = newSize;
 			}
+			this->_allocator.construct(this->_root + this->_size, val);
+			++this->_size;
 		}
 
 		void pop_back(){
-			this->_allocator.destroy(&this->_root[this->size() - 1]);
-			--this->_size;
+			if (this->_size){
+				this->_allocator.destroy(&this->_root[this->size() - 1]);
+				--this->_size;
+			}
 		}
 
 		iterator insert(iterator position, const value_type& val){
@@ -270,7 +256,6 @@ namespace ft{
 		template <class InputIterator>
 		void insert(iterator position, InputIterator first, InputIterator last){
 			vector tmp(first, last);
-
 			for (size_type i = 0; i < tmp.size(); ++i){
 				position = this->__insert(position, 1, tmp.at(i));
 				++position;
@@ -281,13 +266,12 @@ namespace ft{
 			this->_allocator.destroy(position.base());
 
 			iterator it = position;
-
 			while (it != this->end()) {
 				this->_allocator.construct(it.base(), *(it + 1));
 				this->_allocator.destroy(it.base() + 1);
 				++it;
 			}
-			--this->_size; // when position == end it's incorrect
+			--this->_size; // when position == end it's incorrect but it's UB
 			return position;
 		}
 
@@ -301,7 +285,6 @@ namespace ft{
 				this->_allocator.destroy(it.base());
 				++it;
 			}
-			--it;
 			while (it != this->end()){
 				this->_allocator.construct(((it - range).base()), *it);
 				this->_allocator.destroy(it.base());
@@ -312,9 +295,8 @@ namespace ft{
 		}
 
 		void clear(){
-			while (this->_size != 0){
+			while (this->_size != 0)
 				this->pop_back();
-			}
 		}
 
 		void swap(vector& x){
@@ -332,10 +314,10 @@ namespace ft{
 		}
 
 	private:
-		allocator_type _allocator;
-		size_type _size;
-		size_type _guaranteed_capacity;
-		pointer _root;
+		allocator_type			_allocator;
+		size_type				_size;
+		size_type				_guaranteed_capacity;
+		pointer					_root;
 
 		iterator __insert(iterator position, size_type n, const value_type& val){
 			if (n == 0)
@@ -353,9 +335,8 @@ namespace ft{
 					++it;
 				}
 				iter = tmp.end();
-				for (size_type i = 0; i < n; ++i){
+				for (size_type i = 0; i < n; ++i)
 					tmp.push_back(val);
-				}
 				while (it != this->end()){
 					tmp.push_back(*it);
 					++it;
@@ -383,7 +364,7 @@ namespace ft{
 	template <class T, class Alloc>
 	bool operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs){
 		typename  vector<T, Alloc>::size_type sz = lhs.size();
-		return sz == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+		return (sz == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 	}
 
 	template <class T, class Alloc>
@@ -393,7 +374,7 @@ namespace ft{
 
 	template <class T, class Alloc>
 	bool operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs){
-		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 	}
 
 	template <class T, class Alloc>

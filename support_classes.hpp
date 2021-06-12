@@ -3,8 +3,7 @@
 
 namespace ft{
 
-
-
+	// iterator traits. It needs for types iterators ( const or simple )
 	template <class Iterator>
 	class iterator_traits{
 	public:
@@ -35,21 +34,25 @@ namespace ft{
 		typedef std::random_access_iterator_tag iterator_category;
 	};
 
+
+	// check types ( const of non const ). Need it for vector iterator. For others it doesn't work.
 	template <class, class>
-	class check_if_the_same {};
+	struct check_if_the_same {};
 
 	template <class T>
-	class check_if_the_same<T, T>{
-	public:
+	struct check_if_the_same<T, T>{
 		typedef T type;
 	};
 
+	// Need it for ambiguous methods
 	template <bool B, class T = void>
 	struct enable_if { };
 
 	template <class T>
 	struct enable_if<true, T> { typedef T type; };
 
+
+	// Rule that creates a typedefs
 	template <class Arg1, class Arg2, class Result>
 	struct binary_function {
 		typedef Arg1	first_argument_type;
@@ -57,12 +60,15 @@ namespace ft{
 		typedef Result	result_type;
 	};
 
+
+	// Rule that compares which is the smallest
 	template <class T1, class T2>
 	struct _less_twotypes	: binary_function<T1, T2, bool> {
 		bool	operator()(const T1& x, const T2& y) const
 		{	return (x < y);		}
 	};
 
+	// Rule that check equality comparison for
 	template <class T1, class T2>
 	struct _equal_twotypes	: binary_function<T1, T2, bool> {
 		bool	operator()(const T1& x, const T2& y) const

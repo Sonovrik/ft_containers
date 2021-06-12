@@ -4,7 +4,6 @@
 
 namespace ft{
 
-
 	template<class Iterator >
 	class ReverseIterator {
 	public:

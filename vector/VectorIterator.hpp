@@ -1,9 +1,7 @@
 #pragma once
-
-#include "ReverseIterator.hpp"
+#include "../support_classes.hpp"
 
 namespace ft{
-
 
 	template<typename T, typename NoneConstPointer>
 	class VectorIterator {
@@ -28,7 +26,6 @@ namespace ft{
 		VectorIterator(VectorIterator<Tm, NoneConstPointer> const &other,
 					   typename ft::check_if_the_same<Tm, NoneConstPointer>::type * check = NULL):
 			_ptr(other.base()) { (void)check;}
-
 
 		virtual ~VectorIterator(){}
 
@@ -86,35 +83,35 @@ namespace ft{
 			return tmp;
 		}
 
-		/*	a + n	*/
+//			a + n
 		VectorIterator	operator+(difference_type n) const{
 			return VectorIterator(this->_ptr + n);
 		}
 
-		/*	n + a	*/
+//			n + a
 		friend
 		VectorIterator	operator+(difference_type n, const VectorIterator &x) {
 			return x + n;
 		}
 
-		/*	a - n	*/
+//			a - n
 		VectorIterator	operator-(difference_type n) const{
 			return VectorIterator(this->_ptr - n);
 		}
 
-		/*	a - b	*/
+//			a - b
 		friend
 		difference_type operator-(const VectorIterator &x, const VectorIterator &y){
 			return x._ptr - y._ptr;
 		}
 
-		/*	a += n	*/
+//			a += n
 		VectorIterator	&operator+=(difference_type n){
 			this->_ptr += n;
 			return *this;
 		}
 
-		/*	a -= n	*/
+//			a -= n
 		VectorIterator	&operator-=(difference_type n){
 			this->_ptr -= n;
 			return *this;
