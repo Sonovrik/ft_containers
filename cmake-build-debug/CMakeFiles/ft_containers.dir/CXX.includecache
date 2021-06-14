@@ -6,9 +6,19 @@
 
 #IncludeRegexTransform: 
 
+/Users/lmidori/Desktop/ft_containers/list_test/ListIterator.hpp
+../support_classes.hpp
+/Users/lmidori/Desktop/ft_containers/support_classes.hpp
+iostream
+-
+
 /Users/lmidori/Desktop/ft_containers/list_test/list.hpp
 iostream
 -
+../support_classes.hpp
+/Users/lmidori/Desktop/ft_containers/support_classes.hpp
+ListIterator.hpp
+/Users/lmidori/Desktop/ft_containers/list_test/ListIterator.hpp
 
 /Users/lmidori/Desktop/ft_containers/list_test/main.cpp
 iostream
@@ -17,4 +27,18 @@ list.hpp
 /Users/lmidori/Desktop/ft_containers/list_test/list.hpp
 list
 -
+iostream
+-
+sstream
+-
+algorithm
+-
+cstdlib
+-
+ctime
+-
+iomanip
+-
+
+/Users/lmidori/Desktop/ft_containers/support_classes.hpp
 

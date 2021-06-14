@@ -17,4 +17,6 @@ add_executable(ft_containers
 #        support_classes.hpp
         list_test/list.hpp
         list_test/main.cpp
+        list_test/ListIterator.hpp
+
         )

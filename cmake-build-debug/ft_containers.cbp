@@ -86,6 +86,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/list_test/ListIterator.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/list_test/list.hpp">
 			<Option target="ft_containers"/>
 		</Unit>

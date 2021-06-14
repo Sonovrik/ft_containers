@@ -26,7 +26,6 @@ namespace ft {
 	private:
 		pointer	_ptr;
 
-
 	public:
 		ListIterator(): _ptr(NULL){}
 		ListIterator(ListIterator const &other): _ptr(other._ptr){}

@@ -117,6 +117,15 @@ namespace ft{
 		return (ft::equal(first1, last1, first2, ft::_equal_twotypes<type1, type2>()));
 	}
 
+
+	template <class T>
+	struct node {
+		T				_value;
+		node			*_next;
+		node			*_prev;
+	};
+
+
 }
 
 
