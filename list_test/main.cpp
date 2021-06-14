@@ -46,11 +46,28 @@ void		error_exception() {
 	throw std::runtime_error(msg);
 }
 
+template <typename T>
+bool 		check_lists(const std::list<T>& sc, const ft::list<T>& fc){
+	typename std::list<T>::const_iterator sic = sc.begin();
+	typename ft::list<T>::const_iterator fic = fc.begin();
+
+	while (sic != sc.end()){
+		if (*sic != *fic){
+			return false;
+		}
+		fic++;
+		sic++;
+	}
+	if (fic != fc.end()){
+		return false;
+	}
+	return true;
+}
+
 template <class Container1, class Container2>
-void		is_equal(const Container1& sc, const Container2& fc, size_t i = 0)
+void		is_equal(const Container1& sc, const Container2& fc)
 {
-	if (sc.size() == fc.size() && std::equal(sc.begin(), sc.end(), fc.begin()) &&
-		std::equal(fc.begin(), fc.end(), sc.begin())) {
+	if (check_lists(sc, fc)) {
 		std::cout << CLR_GOOD << "containers are equal" << CLR_RESET << std::endl;
 	}
 	else {
@@ -110,6 +127,34 @@ void	list_tests(){
 	}
 	std::cout << "\nTEST 2" << std::endl;
 	{
+		ft::list<int> flis;
+		std::list<int> slis;
+		for (int i = 0; i < 10; ++i){
+			flis.push_back(i * 11);
+			slis.push_back(i * 11);
+		}
+		ft::list<int>::const_iterator fit = flis.begin();
+		ft::list<int>::iterator fit2 = flis.begin();
+		std::list<int>::const_iterator sit = slis.begin();
+		std::list<int>::iterator sit2 = slis.begin();
+
+		fit  = fit2;
+		sit  = sit2;
+
+		if (fit != fit2)
+			error_exception();
+
+		if (sit != sit2)
+			error_exception();
+
+		if (fit2 != fit)
+			error_exception();
+
+		if (sit2 != sit)
+			error_exception();
+
+		ft::list<int>::list_node *tmp = fit.getNode();
+		tmp->_value = 12;
 
 	}
 

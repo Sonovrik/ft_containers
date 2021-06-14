@@ -2,11 +2,17 @@
 
 #include <iostream>
 #include "../support_classes.hpp"
-#include "ListIterator.hpp"
-#include "ReverseIterator.hpp"
 
 namespace ft{
 
+	template <typename T>
+	class ListIterator;
+
+	template <typename T>
+	class ConstListIterator;
+
+	template <typename ImputIterator>
+	class ReverseIterator;
 
 	template < class T, class Alloc = std::allocator<T> >
 	class list{
@@ -18,12 +24,14 @@ namespace ft{
 		typedef typename allocator_type::const_reference					const_reference;
 		typedef typename allocator_type::pointer							pointer;
 		typedef typename allocator_type::const_pointer						const_pointer;
-		typedef node<T>														list_node;
+		typedef node<value_type>														list_node;
 		typedef list_node *													list_node_pointer;
 		typedef typename allocator_type::template rebind<node<T> >::other	node_allocator;
 
-		typedef ListIterator<T, pointer, reference>							iterator;
-		typedef ListIterator<T, const_pointer, const_reference>				const_iterator;
+		typedef ListIterator<value_type>							iterator;
+		typedef ReverseIterator<iterator>									reverse_iterator;
+		typedef ConstListIterator<value_type>				const_iterator;
+		typedef ReverseIterator<const_iterator>								const_reverse_iterator;
 
 
 	private:
@@ -35,8 +43,8 @@ namespace ft{
 	public:
 		explicit list (const allocator_type& alloc = allocator_type()):
 				_allocator(alloc),
-				_size(0),
-				_root(NULL) { _insetBeginning(); }
+				_root(NULL),
+				_size(0) { _insetBeginning(); }
 
 		explicit list (size_type n, const value_type& val = value_type(),
 				   const allocator_type& alloc = allocator_type()):
@@ -89,6 +97,22 @@ namespace ft{
 			return const_iterator(_root);
 		}
 
+		reverse_iterator rbegin(){
+			return reverse_iterator(end());
+		}
+
+		const_reverse_iterator rbegin() const{
+			return const_reverse_iterator(end());
+		}
+
+
+		reverse_iterator rend(){
+			return reverse_iterator(begin());
+		}
+
+		const_reverse_iterator rend() const{
+			return const_reverse_iterator(begin());
+		}
 
 		// Capacity
 		bool 	empty(){
@@ -188,7 +212,7 @@ namespace ft{
 			return tmp;
 		}
 	};
-
-
-
 }
+
+#include "ListIterator.hpp"
+#include "../ReverseIterator.hpp"
