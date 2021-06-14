@@ -6,11 +6,17 @@
 
 #IncludeRegexTransform: 
 
+/Users/lmidori/Desktop/ft_containers/ReverseIterator.hpp
+support_classes.hpp
+/Users/lmidori/Desktop/ft_containers/support_classes.hpp
+
 /Users/lmidori/Desktop/ft_containers/list_test/ListIterator.hpp
 ../support_classes.hpp
 /Users/lmidori/Desktop/ft_containers/support_classes.hpp
 iostream
 -
+list.hpp
+/Users/lmidori/Desktop/ft_containers/list_test/list.hpp
 
 /Users/lmidori/Desktop/ft_containers/list_test/list.hpp
 iostream
@@ -19,6 +25,8 @@ iostream
 /Users/lmidori/Desktop/ft_containers/support_classes.hpp
 ListIterator.hpp
 /Users/lmidori/Desktop/ft_containers/list_test/ListIterator.hpp
+../ReverseIterator.hpp
+/Users/lmidori/Desktop/ft_containers/ReverseIterator.hpp
 
 /Users/lmidori/Desktop/ft_containers/list_test/main.cpp
 iostream
@@ -38,6 +46,8 @@ cstdlib
 ctime
 -
 iomanip
+-
+cmath
 -
 
 /Users/lmidori/Desktop/ft_containers/support_classes.hpp

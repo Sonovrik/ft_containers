@@ -98,8 +98,7 @@ namespace ft{
 	}
 
 	template <class InputIterator1, class InputIterator2, class BinaryPredicate>
-	bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, BinaryPredicate pred)
-	{
+	bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, BinaryPredicate pred) {
 		while (first1 != last1){
 			if (!pred(*first1, *first2))
 				return false;
@@ -110,11 +109,17 @@ namespace ft{
 	}
 
 	template <class InputIterator1, class InputIterator2>
-	bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
-	{
+	bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2) {
 		typedef typename ft::iterator_traits<InputIterator1>::value_type type1;
 		typedef typename ft::iterator_traits<InputIterator2>::value_type type2;
 		return (ft::equal(first1, last1, first2, ft::_equal_twotypes<type1, type2>()));
+	}
+
+	template< typename S >
+	void	itemswap(S& var1, S& var2) {
+		S tmpvar = var1;
+		var1 = var2;
+		var2 = tmpvar;
 	}
 
 
