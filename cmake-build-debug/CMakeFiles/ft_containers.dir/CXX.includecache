@@ -6,49 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/Users/lmidori/Desktop/ft_containers/ReverseIterator.hpp
-support_classes.hpp
-/Users/lmidori/Desktop/ft_containers/support_classes.hpp
-
-/Users/lmidori/Desktop/ft_containers/list_test/ListIterator.hpp
-../support_classes.hpp
-/Users/lmidori/Desktop/ft_containers/support_classes.hpp
+/Users/lmidori/Desktop/ft_containers/queue/main.cpp
 iostream
 -
-list.hpp
-/Users/lmidori/Desktop/ft_containers/list_test/list.hpp
+queue
+-
+queue.hpp
+/Users/lmidori/Desktop/ft_containers/queue/queue.hpp
 
-/Users/lmidori/Desktop/ft_containers/list_test/list.hpp
-iostream
+/Users/lmidori/Desktop/ft_containers/queue/queue.hpp
+deque
 -
-../support_classes.hpp
-/Users/lmidori/Desktop/ft_containers/support_classes.hpp
-ListIterator.hpp
-/Users/lmidori/Desktop/ft_containers/list_test/ListIterator.hpp
-../ReverseIterator.hpp
-/Users/lmidori/Desktop/ft_containers/ReverseIterator.hpp
-
-/Users/lmidori/Desktop/ft_containers/list_test/main.cpp
-iostream
--
-list.hpp
-/Users/lmidori/Desktop/ft_containers/list_test/list.hpp
-list
--
-iostream
--
-sstream
--
-algorithm
--
-cstdlib
--
-ctime
--
-iomanip
--
-cmath
--
-
-/Users/lmidori/Desktop/ft_containers/support_classes.hpp
 

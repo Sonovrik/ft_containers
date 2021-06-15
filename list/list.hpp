@@ -2,14 +2,10 @@
 
 #include <iostream>
 #include "../support_classes.hpp"
+#include "ListIterator.hpp"
+#include "../ReverseIterator.hpp"
 
 namespace ft{
-
-	template <typename T, typename Pointer, typename Reference>
-	class ListIterator;
-
-	template <typename ImputIterator>
-	class ReverseIterator;
 
 	template < class T, class Alloc = std::allocator<T> >
 	class list{
@@ -21,7 +17,7 @@ namespace ft{
 		typedef typename allocator_type::const_reference					const_reference;
 		typedef typename allocator_type::pointer							pointer;
 		typedef typename allocator_type::const_pointer						const_pointer;
-		typedef node<value_type>														list_node;
+		typedef node<value_type>											list_node;
 		typedef list_node *													list_node_pointer;
 		typedef typename allocator_type::template rebind<node<T> >::other	node_allocator;
 
@@ -46,8 +42,8 @@ namespace ft{
 		explicit list (size_type n, const value_type& val = value_type(),
 				   const allocator_type& alloc = allocator_type()):
 				   _allocator(alloc),
-				   _size(0),
-				   _root(NULL){
+				   _root(NULL),
+				   _size(0){
 			_insetBeginning();
 			for (size_type i = 0; i < n; ++i)
 				push_back(val);
@@ -83,6 +79,12 @@ namespace ft{
 		~list(){
 			clear();
 			_nodeAllocator.deallocate(_root, 1);
+		}
+
+		list&	operator=(const list& x){
+			if (this != &x)
+				assign(x.begin(), x.end());
+			return *this;
 		}
 
 		// Iterators
@@ -296,14 +298,7 @@ namespace ft{
 		}
 
 		void unique(){
-			iterator it = begin();
-			value_type val;
-			while (it != end()){
-				val = *it;
-				++it;
-				while (it != end() && *it == val)
-					it = erase(it);
-			}
+			unique(ft::_equal_compration<value_type>());
 		}
 
 		template <class BinaryPredicate>
@@ -332,24 +327,95 @@ namespace ft{
 		}
 
 		void splice (iterator position, list& x){
-			if (this->empty() || x.empty() || &x == this)
+			if (x.empty() || &x == this)
 				return;
-//
-//			list_node *tmp = position._ptr;
-//			tmp->_prev->_next = x.begin();
-//			tmp->_prev->_next->_prev = tmp;
+			list_node *pos_prev = position._ptr->_prev;
+			pos_prev->_next = x._root->_next;
+			x._root->_next->_prev = pos_prev;
+			position._ptr->_prev = x._root->_prev;
+			x._root->_prev->_next = position._ptr;
+			_size += x._size;
 
+			x._root->_next = x._root;
+			x._root->_prev = x._root;
+			x._size = 0;
 		}
 
 		void splice (iterator position, list& x, iterator i){
+			if (x.empty() || &x == this || position == i)
+				return;
+			list_node *pos_prev = position._ptr->_prev;
+			list_node *x_pos = i._ptr;
 
+			x_pos->_prev->_next = x_pos->_next;
+			x_pos->_next->_prev = x_pos->_prev;
+
+			x_pos->_prev = pos_prev;
+			x_pos->_next = position._ptr;
+
+
+			pos_prev->_next = x_pos;
+			position._ptr->_prev = x_pos;
+			++_size;
+			--x._size;
 		}
 
 		void splice (iterator position, list& x, iterator first, iterator last){
-
+			if (x.empty() || first == x.end())
+				return;
+			iterator it = first;
+			while (first != last){
+				++it;
+				splice(position, x, first);
+				first = it;
+			}
 		}
 
+		void merge (list& x){
+			merge(x, ft::_less_compration<value_type>());
+		}
 
+		template <class Compare>
+		void merge (list& x, Compare comp){
+			if (x.empty() || &x == this)
+				return ;
+			iterator xit = x.begin();
+			iterator it = begin();
+			while (xit != x.end() && it != end()){
+				if (comp(*xit, *it)){
+					iterator tmp = xit;
+					++xit;
+					splice(it, x, tmp);
+				}
+				else
+					++it;
+			}
+			if (xit != x.end())
+				splice(end(), x);
+		}
+
+		void sort(){
+			sort(ft::_less_compration<value_type>());
+		}
+
+		template <class Compare>
+		void sort (Compare comp){
+			if (_size < 2)
+				return;
+			iterator it = begin();
+			size_t i = 0;
+			while ((i * 2 < _size) && (it != end())){
+				++it;
+				++i;
+			}
+			list half;
+			half.splice(half.begin(), *this, it, this->end());
+
+			this->sort(comp);
+			half.sort(comp);
+
+			this->merge(half, comp);
+		}
 
 	private:
 
@@ -372,7 +438,44 @@ namespace ft{
 			return tmp;
 		}
 	};
+
+	template <class T, class Alloc>
+	bool operator==(const list<T,Alloc>& lhs, const list<T,Alloc>& rhs){
+		typename  list<T, Alloc>::size_type sz = lhs.size();
+		return (sz == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+	}
+
+	template <class T, class Alloc>
+	bool operator!=(const list<T,Alloc>& lhs, const list<T,Alloc>& rhs){
+		return !(lhs == rhs);
+	}
+
+	template <class T, class Alloc>
+	bool operator<(const list<T,Alloc>& lhs, const list<T,Alloc>& rhs){
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	}
+
+	template <class T, class Alloc>
+	bool operator<=(const list<T,Alloc>& lhs, const list<T,Alloc>& rhs){
+		return !(rhs < lhs);
+	}
+
+	template <class T, class Alloc>
+	bool operator>(const list<T,Alloc>& lhs, const list<T,Alloc>& rhs){
+		return (rhs < lhs);
+	}
+
+	template <class T, class Alloc>
+	bool operator>=(const list<T,Alloc>& lhs, const list<T,Alloc>& rhs){
+		return !(lhs < rhs);
+	}
+
+	template <class T, class Alloc>
+	void swap (list<T,Alloc>& x, list<T,Alloc>& y){
+		x.swap(y);
+	}
 }
 
-#include "ListIterator.hpp"
-#include "../ReverseIterator.hpp"
+
+
+

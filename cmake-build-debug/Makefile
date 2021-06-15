@@ -142,32 +142,32 @@ ft_containers/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/build
 .PHONY : ft_containers/fast
 
-list_test/main.o: list_test/main.cpp.o
+queue/main.o: queue/main.cpp.o
 
-.PHONY : list_test/main.o
+.PHONY : queue/main.o
 
 # target to build an object file
-list_test/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/list_test/main.cpp.o
-.PHONY : list_test/main.cpp.o
+queue/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/queue/main.cpp.o
+.PHONY : queue/main.cpp.o
 
-list_test/main.i: list_test/main.cpp.i
+queue/main.i: queue/main.cpp.i
 
-.PHONY : list_test/main.i
+.PHONY : queue/main.i
 
 # target to preprocess a source file
-list_test/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/list_test/main.cpp.i
-.PHONY : list_test/main.cpp.i
+queue/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/queue/main.cpp.i
+.PHONY : queue/main.cpp.i
 
-list_test/main.s: list_test/main.cpp.s
+queue/main.s: queue/main.cpp.s
 
-.PHONY : list_test/main.s
+.PHONY : queue/main.s
 
 # target to generate assembly for a file
-list_test/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/list_test/main.cpp.s
-.PHONY : list_test/main.cpp.s
+queue/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/queue/main.cpp.s
+.PHONY : queue/main.cpp.s
 
 # Help Target
 help:
@@ -178,9 +178,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ft_containers"
-	@echo "... list_test/main.o"
-	@echo "... list_test/main.i"
-	@echo "... list_test/main.s"
+	@echo "... queue/main.o"
+	@echo "... queue/main.i"
+	@echo "... queue/main.s"
 .PHONY : help
 
 

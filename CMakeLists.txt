@@ -15,8 +15,12 @@ add_executable(ft_containers
 #        vector/VectorIterator.hpp
 #        vector/ReverseIterator.hpp
 #        support_classes.hpp
-        list_test/list.hpp
-        list_test/main.cpp
-        list_test/ListIterator.hpp
-        ReverseIterator.hpp
+#        list/list.hpp
+#        list/main.cpp
+#        list/ListIterator.hpp
+#        ReverseIterator.hpp
+#        stack/stack.hpp
+#        stack/main.cpp
+        queue/queue.hpp
+        queue/main.cpp
         )

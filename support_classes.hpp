@@ -1,4 +1,3 @@
-
 #pragma once
 
 namespace ft{
@@ -61,11 +60,25 @@ namespace ft{
 	};
 
 
-	// Rule that compares which is the smallest
+	// Rule that compares which type is the smallest
 	template <class T1, class T2>
 	struct _less_twotypes	: binary_function<T1, T2, bool> {
 		bool	operator()(const T1& x, const T2& y) const
 		{	return (x < y);		}
+	};
+
+	// Rule that compares which value is the smallest
+	template <class T>
+	struct _less_compration : binary_function<T, T, bool> {
+		bool	operator()(const T& x, const T& y) const
+		{	return (x < y);		}
+	};
+
+	// Rule that compares whether they are equal
+	template <class T>
+	struct _equal_compration : binary_function<T, T, bool> {
+		bool	operator()(const T& x, const T& y) const
+		{	return (x == y);		}
 	};
 
 	// Rule that check equality comparison for
@@ -121,7 +134,6 @@ namespace ft{
 		var1 = var2;
 		var2 = tmpvar;
 	}
-
 
 	template <class T>
 	struct node {
