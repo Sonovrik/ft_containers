@@ -21,6 +21,9 @@ add_executable(ft_containers
 #        ReverseIterator.hpp
 #        stack/stack.hpp
 #        stack/main.cpp
-        queue/queue.hpp
-        queue/main.cpp
+#        queue/queue.hpp
+#        queue/main.cpp
+        map/map.hpp
+        map/main.cpp
+        map/MapIterator.hpp
         )

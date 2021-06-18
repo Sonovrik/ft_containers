@@ -6,15 +6,29 @@
 
 #IncludeRegexTransform: 
 
-/Users/lmidori/Desktop/ft_containers/queue/main.cpp
+/Users/lmidori/Desktop/ft_containers/map/MapIterator.hpp
+../support_classes.hpp
+/Users/lmidori/Desktop/ft_containers/support_classes.hpp
+
+/Users/lmidori/Desktop/ft_containers/map/main.cpp
+map.hpp
+/Users/lmidori/Desktop/ft_containers/map/map.hpp
+map
+-
+
+/Users/lmidori/Desktop/ft_containers/map/map.hpp
+../support_classes.hpp
+/Users/lmidori/Desktop/ft_containers/support_classes.hpp
+utility
+-
 iostream
 -
-queue
--
-queue.hpp
-/Users/lmidori/Desktop/ft_containers/queue/queue.hpp
+../support_classes.hpp
+/Users/lmidori/Desktop/ft_containers/support_classes.hpp
+MapIterator.hpp
+/Users/lmidori/Desktop/ft_containers/map/MapIterator.hpp
 
-/Users/lmidori/Desktop/ft_containers/queue/queue.hpp
-deque
+/Users/lmidori/Desktop/ft_containers/support_classes.hpp
+iostream
 -
 

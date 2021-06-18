@@ -86,10 +86,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/queue/main.cpp">
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/map/MapIterator.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/queue/queue.hpp">
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/map/main.cpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/map/map.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/CMakeLists.txt">

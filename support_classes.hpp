@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 namespace ft{
 
 	// iterator traits. It needs for types iterators ( const or simple )
@@ -140,6 +142,36 @@ namespace ft{
 		T				_value;
 		node			*_next;
 		node			*_prev;
+	};
+
+	template<class Alloc>
+	struct __base{
+	private:
+		typedef Alloc									allocator_type;
+		typedef typename allocator_type::value_type		value_type;
+		typedef __base<allocator_type>					map_node;
+	public:
+		value_type		data;
+		map_node		*parent;
+		map_node		*left;
+		map_node		*right;
+		bool 			isRed;
+
+		template <class NodePtr>
+		NodePtr 	get_min(NodePtr& node, const map_node* nill){
+			while (node != nill && node.left != nill)
+				node = node.left;
+			return node;
+		}
+
+		template <class NodePtr>
+		NodePtr 	get_max(NodePtr& node, const map_node* nill){
+			while (node != nill && node.right != nill)
+				node = node.right;
+			return node;
+		}
+
+
 	};
 
 
