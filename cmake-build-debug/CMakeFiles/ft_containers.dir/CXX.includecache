@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/Users/lmidori/Desktop/ft_containers/ReverseIterator.hpp
+support_classes.hpp
+/Users/lmidori/Desktop/ft_containers/support_classes.hpp
+
 /Users/lmidori/Desktop/ft_containers/map/MapIterator.hpp
 ../support_classes.hpp
 /Users/lmidori/Desktop/ft_containers/support_classes.hpp
@@ -23,10 +27,10 @@ utility
 -
 iostream
 -
-../support_classes.hpp
-/Users/lmidori/Desktop/ft_containers/support_classes.hpp
 MapIterator.hpp
 /Users/lmidori/Desktop/ft_containers/map/MapIterator.hpp
+../ReverseIterator.hpp
+/Users/lmidori/Desktop/ft_containers/ReverseIterator.hpp
 
 /Users/lmidori/Desktop/ft_containers/support_classes.hpp
 iostream

@@ -3,9 +3,8 @@
 #include "../support_classes.hpp"
 #include <utility>
 #include <iostream>
-
-#include "../support_classes.hpp"
 #include "MapIterator.hpp"
+#include "../ReverseIterator.hpp"
 
 namespace ft{
 
@@ -33,7 +32,10 @@ namespace ft{
 		typedef typename allocator_type::size_type					size_type;
 		typedef std::pair<const key_type, mapped_type>				value_type;
 
-		typedef MapIterator<Alloc>							iterator;
+		typedef MapIterator<Key, T>									iterator;
+		typedef ConstMapIterator<Key, T>							const_iterator;
+		typedef ReverseIterator<iterator>							reverse_iterator;
+		typedef ReverseIterator<const_iterator>						const_reverse_iterator;
 
 		// in C++98, it is required to inherit binary_function<value_type,value_type,bool>
 		class value_compare : public binary_function<value_type, value_type, bool> {
@@ -51,9 +53,8 @@ namespace ft{
 		};
 
 	private:
-		typedef __base<Alloc>										map_node;
+		typedef __base<Key, T>										map_node;
 		typedef typename Alloc::template rebind<map_node>::other	node_allocator_type;
-//		typedef std::pair<iterator, bool>	map_insres;
 
 		node_allocator_type		_node_allocator;
 		value_compare			_comp;
@@ -69,12 +70,16 @@ namespace ft{
 			_init_nill();
 		}
 
-//		template <class InputIterator>
-//		map (InputIterator first, InputIterator last,
-//			 const key_compare& comp = key_compare(),
-//			 const allocator_type& alloc = allocator_type()){
-//
-//		}
+		template <class InputIterator>
+		map (InputIterator first, InputIterator last,
+			 const key_compare& comp = key_compare(),
+			 const allocator_type& alloc = allocator_type()):
+			 _node_allocator(alloc),
+			 _comp(comp),
+			 _size(0){
+			_init_nill();
+			insert(first, last);
+		}
 //
 //		map (const map& x){
 //
@@ -84,23 +89,22 @@ namespace ft{
 
 		}
 
-
 		// Iterators
 		iterator begin(){
 			return iterator(_nill->left, _nill);
 		}
 
-//		const_iterator begin() const{
-//
-//		}
+		const_iterator begin() const{
+			return const_iterator(_nill->left, _nill);
+		}
 
 		iterator end(){
 			return iterator(_nill, _nill);
 		}
 
-//		const_iterator end() const{
-//
-//		}
+		const_iterator end() const{
+			return const_iterator(_nill, _nill);
+		}
 
 		// Capacity:
 		size_type size() const{
@@ -118,24 +122,58 @@ namespace ft{
 
 
 		// Modifiers
-		std::pair<iterator,bool> insert (const value_type& val){
-			// find element
-			// node = find
-			// if (node) retunr ... false
-			// else
-			map_node *newNode = _map_insert(val);
-			++this->_size;
-			return std::make_pair(iterator(newNode), true);
+		std::pair<iterator,bool> insert (const_reference val){
+			map_node *node = _find_node(_root, val);
+			if (node != NULL)
+				return std::make_pair(iterator(node, _nill), false);
+			node = _map_insert(val);
+			++_size;
+			return std::make_pair(iterator(node, _nill), true);
 		}
 
 		iterator insert (iterator position, const value_type& val){
-
+			static_cast<void>(position);
+			insert(val);
 		}
 
 		template <class InputIterator>
 		void insert (InputIterator first, InputIterator last){
-
+			while (first != last){
+				insert(*first);
+				++first;
+			}
 		}
+
+//		void erase (iterator position){
+//
+//		}
+
+		// ???
+		size_type erase (const key_type& k){
+			map_node *node;
+			if (empty() || (node = _find_node_by_key(_root, k)) == NULL)
+				return size_type(0);
+
+			// if node doesn't have left or right
+			if (node->left == _nill && node->right == _nill){
+				if (node->parent->left == node) // replace to _nill parent ...
+					node->parent->left = _nill;
+				if (node->parent->right == node)
+					node->parent->right = _nill;
+				_destroy_node(node);
+			}
+			else if ((node->left == _nill && node->right != _nill)
+				|| (node->left != _nill && node->right == _nill)){
+
+			}
+
+			--_size;
+			return size_type(1);
+		}
+
+//		void erase (iterator first, iterator last){
+//
+//		}
 
 
 
@@ -152,7 +190,7 @@ namespace ft{
 		}
 
 		void 		_insert_at(map_node *node, map_node *newNode){
-			if (_com(node->data, newNode->data)){
+			if (_comp(newNode->data, node->data)){
 				if (node->left != _nill){
 					_insert_at(node->left, newNode);
 					return;
@@ -179,7 +217,11 @@ namespace ft{
 				_insert_at(_root, newNode);
 			}
 
-//			balance + _nill right, left
+			//balane
+
+			// assign new begin and end ...
+			_nill->left = get_min(_root, _nill);
+			_nill->parent = get_max(_root, _nill);
 			return newNode;
 		}
 
@@ -191,9 +233,10 @@ namespace ft{
 			newNode->right = _nill;
 			newNode->isRed = false;
 			data_allocator.construct(&(newNode->data), val);
+			return newNode;
 		}
 
-		void 		_delete_node(map_node *node){
+		void 		_destroy_node(map_node *node){
 			allocator_type data_allocator(_node_allocator);
 			data_allocator.destroy(&(node->data));
 			_node_allocator.deallocate(node, 1);
@@ -202,7 +245,21 @@ namespace ft{
 		map_node *_find_node(map_node *node, const_reference val){
 			if (node == _nill)
 				return NULL;
+			if (_comp(val, node->data))
+				return (_find_node(node->left, val));
+			if (_comp(node->data, val))
+				return (_find_node(node->right, val));
+			return node;
+		}
 
+		map_node *_find_node_by_key(map_node *node, const key_type &key){
+			if (node == _nill)
+				return NULL;
+			if (_comp.comp(key, node->data.first))
+				return (_find_node_by_key(node->left, key));
+			if (_comp.comp(node->data.first, key))
+				return (_find_node_by_key(node->right, key));
+			return node;
 		}
 
 	};

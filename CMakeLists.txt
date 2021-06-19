@@ -26,4 +26,6 @@ add_executable(ft_containers
         map/map.hpp
         map/main.cpp
         map/MapIterator.hpp
+        support_classes.hpp
+        ReverseIterator.hpp
         )

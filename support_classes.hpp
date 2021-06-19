@@ -144,12 +144,14 @@ namespace ft{
 		node			*_prev;
 	};
 
-	template<class Alloc>
+	template <class Key, class T>
 	struct __base{
 	private:
-		typedef Alloc									allocator_type;
-		typedef typename allocator_type::value_type		value_type;
-		typedef __base<allocator_type>					map_node;
+		typedef std::pair<const Key, T>						value_type;
+		typedef __base<Key, T>						map_node;
+
+		__base(): parent(NULL), left(NULL), right(NULL), isRed(false) {}
+
 	public:
 		value_type		data;
 		map_node		*parent;
@@ -157,24 +159,27 @@ namespace ft{
 		map_node		*right;
 		bool 			isRed;
 
-		template <class NodePtr>
-		NodePtr 	get_min(NodePtr& node, const map_node* nill){
-			while (node != nill && node.left != nill)
-				node = node.left;
-			return node;
-		}
-
-		template <class NodePtr>
-		NodePtr 	get_max(NodePtr& node, const map_node* nill){
-			while (node != nill && node.right != nill)
-				node = node.right;
-			return node;
-		}
-
-
+		__base(map_node* nill, const value_type& data):
+		data(data),
+		parent(nill),
+		left(nill),
+		right(nill),
+		isRed(false) {}
 	};
 
+	template <class K, class T>
+	__base<K, T>* 	get_min(__base<K, T>* node, const __base<K, T>* nill){
+		while (node != nill && node->left != nill)
+			node = node->left;
+		return node;
+	}
 
+	template <class K, class T>
+	__base<K, T>* 	get_max(__base<K, T>* node, const __base<K, T>* nill){
+		while (node != nill && node->right != nill)
+			node = node->right;
+		return node;
+	}
 }
 
 
