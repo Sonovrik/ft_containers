@@ -8,11 +8,11 @@ namespace ft{
 	public:
 		typedef std::bidirectional_iterator_tag							iterator_category;
 		typedef std::pair<const K, T>									value_type;
+		typedef value_type*												pointer;
 		typedef std::pair<const K, T>&									reference;
 		typedef std::ptrdiff_t											difference_type;
 
-		typedef __base<K, T>*									pointer;
-		typedef __base<K, T>									map_node;
+		typedef __base<K, T>											map_node;
 
 	private:
 		map_node *_node;
@@ -67,7 +67,7 @@ namespace ft{
 		}
 
 		pointer operator->() const {
-			return &(_node->data);
+			return &(operator*());
 		}
 
 		MapIterator &operator++(){
@@ -118,9 +118,10 @@ namespace ft{
 		typedef std::bidirectional_iterator_tag					iterator_category;
 		typedef std::pair<K, T>									value_type;
 		typedef std::pair<K, T>&								reference;
+		typedef value_type*										pointer;
+		typedef std::ptrdiff_t									difference_type;
 
-		typedef __base<K, T>*									pointer;
-		typedef __base<K, T>									map_node;
+		typedef const __base<K, T>								map_node;
 
 	private:
 		const map_node *_node;
@@ -177,8 +178,8 @@ namespace ft{
 			return _node->data;
 		}
 
-		pointer operator->() const {
-			return &(_node->data);
+		value_type *operator->() const {
+			return &(operator*());
 		}
 
 		ConstMapIterator &operator++(){

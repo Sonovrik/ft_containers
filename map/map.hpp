@@ -149,7 +149,10 @@ namespace ft{
 			return (size_type(-1) / sizeof(value_type)); // ???
 		}
 
-
+		// Element access:
+		mapped_type& operator[] (const key_type& k){
+			return ((*((this->insert(make_pair(k,mapped_type()))).first)).second);
+		}
 
 		// Modifiers
 		std::pair<iterator,bool> insert (const_reference val){
@@ -292,13 +295,52 @@ namespace ft{
 		}
 
 		iterator lower_bound (const key_type& k){
-
+			iterator it = begin();
+			while (it != end()){
+				if (!(_comp.comp(it->first, k)))
+					break;
+				++it;
+			}
+			return it;
 		}
 
 		const_iterator lower_bound (const key_type& k) const{
-
+			const_iterator it = begin();
+			while (it != end()){
+				if (!(_comp.comp(it->first, k)))
+					break;
+				++it;
+			}
+			return it;
 		}
 
+		iterator upper_bound (const key_type& k){
+			iterator it = begin();
+			while (it != end()){
+				if (_comp.comp(k, it->first))
+					break;
+				++it;
+			}
+			return it;
+		}
+
+		const_iterator upper_bound (const key_type& k) const{
+			const_iterator it = begin();
+			while (it != end()){
+				if (_comp.comp(k, it->first))
+					break;
+				++it;
+			}
+			return it;
+		}
+
+		std::pair<const_iterator,const_iterator>	equal_range (const key_type& k) const{
+			return (std::pair<const_iterator, const_iterator>(lower_bound(k), upper_bound(k)));
+		}
+
+		std::pair<iterator,iterator>		equal_range (const key_type& k){
+			return (std::pair<iterator, iterator>(lower_bound(k), upper_bound(k)));
+		}
 
 
 

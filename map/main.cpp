@@ -50,12 +50,15 @@ int 	main(){
 	std::cout << std::endl;
 
 	ft::map<int, int> mp(asd2.begin(), asd2.end());
+
 	it2 = mp.rbegin();
 	while (it2 !=  mp.rend()){
 		std::cout << (*it2).second << " ";
 		++it2;
 	}
-	mp.clear();
+
+	int k = 1;
+	mp.lower_bound(k);
 	std::cout << std::endl;
 
 
