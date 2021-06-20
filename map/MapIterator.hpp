@@ -9,17 +9,21 @@ namespace ft{
 		typedef std::bidirectional_iterator_tag							iterator_category;
 		typedef std::pair<const K, T>									value_type;
 		typedef std::pair<const K, T>&									reference;
+		typedef std::ptrdiff_t											difference_type;
 
 		typedef __base<K, T>*									pointer;
 		typedef __base<K, T>									map_node;
 
 	private:
 		map_node *_node;
-		const map_node *_nill;
+		map_node *_nill;
 
-		map_node 	*_next_iter(map_node *node, const map_node* nill){
+		map_node 	*_next_iter(map_node *node, map_node* nill){
 			if (node->right != nill)
 				node = ft::get_min(node->right, nill);
+			else if (node == _nill->parent){
+				node = _nill;
+			}
 			else{
 				map_node *tmp = node;
 				node = node->parent;
@@ -31,9 +35,11 @@ namespace ft{
 			return node;
 		}
 
-		map_node 	*_prev_iter(map_node *node, const map_node* nill){
+		map_node 	*_prev_iter(map_node *node, map_node* nill){
 			if (node->left != nill)
 				node = get_max(node->left, nill);
+			else if (_nill->left == node)
+				node = _nill;
 			else
 				node = node->parent;
 			return node;
@@ -42,7 +48,7 @@ namespace ft{
 	public:
 		MapIterator(): _node(NULL), _nill(NULL) {}
 
-		explicit MapIterator(map_node *node, const map_node *nill): _node(node), _nill(nill) {}
+		explicit MapIterator(map_node *node, map_node *nill): _node(node), _nill(nill) {}
 
 		MapIterator(const MapIterator &other): _node(other._node), _nill(other._nill) {}
 
@@ -86,11 +92,11 @@ namespace ft{
 			return tmp;
 		}
 
-		map_node *base() const{
+		const map_node *base() const{
 			return _node;
 		}
 
-		map_node * base_nill() const{
+		const map_node * base_nill() const{
 			return _nill;
 		}
 

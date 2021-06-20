@@ -305,17 +305,10 @@ namespace ft{
 		}
 
 		void swap(vector& x){
-			size_type tmp_size = this->_size;
-			size_type tmp_capacity = this->_guaranteed_capacity;
-			pointer tmp_root = this->_root;
-
-			this->_size = x._size;
-			this->_guaranteed_capacity = x._guaranteed_capacity;
-			this->_root = x._root;
-
-			x._size = tmp_size;
-			x._guaranteed_capacity = tmp_capacity;
-			x._root = tmp_root;
+			ft::itemswap(this->_size, x._size);
+			ft::itemswap(this->_guaranteed_capacity, x._guaranteed_capacity);
+			ft::itemswap(this->_root, x._root);
+			ft::itemswap(this->_allocator, x._allocator);
 		}
 
 	private:

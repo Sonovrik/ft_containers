@@ -80,14 +80,28 @@ namespace ft{
 			_init_nill();
 			insert(first, last);
 		}
-//
-//		map (const map& x){
-//
-//		}
+
+		map (const map& x):
+			_node_allocator(x._node_allocator),
+			_comp(x._comp),
+			_size(0){
+			_init_nill();
+			insert(x.begin(), x.end());
+		}
 
 		~map(){
-
+			clear();
+			_node_allocator.deallocate(_nill, 1);
 		}
+
+		map& operator=(const map& x){
+			if (this != &x){
+				clear();
+				insert(x.begin(), x.end());
+			}
+			return *this;
+		}
+
 
 		// Iterators
 		iterator begin(){
@@ -104,6 +118,22 @@ namespace ft{
 
 		const_iterator end() const{
 			return const_iterator(_nill, _nill);
+		}
+
+		reverse_iterator rbegin(){
+			return reverse_iterator(end());
+		}
+
+		const_reverse_iterator rbegin() const{
+			return const_reverse_iterator(end());
+		}
+
+		reverse_iterator rend(){
+			return reverse_iterator(begin());
+		}
+
+		const_reverse_iterator rend() const{
+			return const_reverse_iterator(begin());
 		}
 
 		// Capacity:
@@ -138,42 +168,138 @@ namespace ft{
 
 		template <class InputIterator>
 		void insert (InputIterator first, InputIterator last){
-			while (first != last){
-				insert(*first);
-				++first;
-			}
+			while (first != last)
+				insert(*first++);
 		}
 
-//		void erase (iterator position){
-//
-//		}
+		void erase (iterator position){
+			erase(position.base()->data.first);
+		}
 
-		// ???
 		size_type erase (const key_type& k){
 			map_node *node;
 			if (empty() || (node = _find_node_by_key(_root, k)) == NULL)
 				return size_type(0);
 
+			// check which is child (left or right parent) ...
+			map_node **side_node;
+			if (node == _root)
+				side_node = &(_nill->right);
+			else if (node->parent->left == node) // replace to _nill parent ...
+				side_node = &(node->parent->left);
+			else if (node->parent->right == node)
+				side_node = &(node->parent->right);
 			// if node doesn't have left or right
 			if (node->left == _nill && node->right == _nill){
-				if (node->parent->left == node) // replace to _nill parent ...
-					node->parent->left = _nill;
-				if (node->parent->right == node)
-					node->parent->right = _nill;
+				*side_node = _nill;
+				if (node == _root)
+					_root = _nill;
 				_destroy_node(node);
 			}
-			else if ((node->left == _nill && node->right != _nill)
-				|| (node->left != _nill && node->right == _nill)){
-
+			// only right
+			else if (node->right != _nill && node->left == _nill){
+				*side_node = node->right;
+				node->right->parent = node->parent;
+				if (node == _root)
+					_root = node->right;
+				_destroy_node(node);
 			}
-
+			// only left
+			else if ((node->left != _nill && node->right == _nill)){
+				*side_node = node->left;
+				node->left->parent = node->parent;
+				if (node == _root)
+					_root = node->left;
+				_destroy_node(node);
+			}
+			else{
+				if (node->right->left == _nill){
+					// change parent
+					*side_node = node->right;
+					node->right->parent = node->parent;
+					node->right->left = node->left;
+					node->left->parent = node->right;
+					if (node == _root)
+						_root = node->right;
+					_destroy_node(node);
+				}
+				else{
+					map_node *last_left = get_min(node->right, _nill);
+					*(side_node) = last_left;
+					last_left->parent->left = _nill;
+					last_left->parent = node->parent;
+					node->left->parent = last_left;
+					last_left->left = node->left;
+					node->right->parent = last_left;
+					last_left->right = node->right;
+					if (node == _root)
+						_root = last_left;
+					_destroy_node(node);
+				}
+			}
 			--_size;
+			_nill->left = get_min(_root, _nill);
+			_nill->parent = get_max(_root, _nill);
 			return size_type(1);
 		}
 
-//		void erase (iterator first, iterator last){
-//
-//		}
+		void erase (iterator first, iterator last) {
+			while (first != last)
+				erase(first++);
+		}
+
+		void clear(){
+			while (_size)
+				erase(begin());
+		}
+
+		void swap (map& x){
+			ft::itemswap(this->_nill, x._nill);
+			ft::itemswap(this->_root, x._root);
+			ft::itemswap(this->_size, x._size);
+			ft::itemswap(this->_comp, x._comp);
+			ft::itemswap(this->_node_allocator, x._node_allocator);
+		}
+
+		// Observers
+		key_compare key_comp() const{
+			return _comp.comp;
+		}
+
+		value_compare value_comp() const{
+			return _comp;
+		}
+
+		// Operations
+		iterator find (const key_type& k){
+			map_node *node = _find_node_by_key(_root, k);
+			if (node == NULL)
+				return end();
+			return iterator(node);
+		}
+
+		const_iterator find (const key_type& k) const{
+			map_node *node = _find_node_by_key(_root, k);
+			if (node == NULL)
+				return end();
+			return const_iterator(node);
+		}
+
+		size_type count (const key_type& k) const{
+			if (_find_node_by_key(_root, k) == NULL)
+				return 0;
+			return 1;
+		}
+
+		iterator lower_bound (const key_type& k){
+
+		}
+
+		const_iterator lower_bound (const key_type& k) const{
+
+		}
+
+
 
 
 
@@ -217,9 +343,8 @@ namespace ft{
 				_insert_at(_root, newNode);
 			}
 
-			//balane
+			//balance
 
-			// assign new begin and end ...
 			_nill->left = get_min(_root, _nill);
 			_nill->parent = get_max(_root, _nill);
 			return newNode;
