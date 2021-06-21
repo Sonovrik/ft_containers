@@ -5,5 +5,6 @@ CMakeFiles/ft_containers.dir/map/main.cpp.o: ../ReverseIterator.hpp
 CMakeFiles/ft_containers.dir/map/main.cpp.o: ../map/MapIterator.hpp
 CMakeFiles/ft_containers.dir/map/main.cpp.o: ../map/main.cpp
 CMakeFiles/ft_containers.dir/map/main.cpp.o: ../map/map.hpp
+CMakeFiles/ft_containers.dir/map/main.cpp.o: ../map/map_base.hpp
 CMakeFiles/ft_containers.dir/map/main.cpp.o: ../support_classes.hpp
 

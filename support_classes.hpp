@@ -18,7 +18,7 @@ namespace ft{
 	template <class T>
 	class iterator_traits <T*>{
 	public:
-		typedef ptrdiff_t						difference_type;
+		typedef std::ptrdiff_t					difference_type;
 		typedef T								value_type;
 		typedef T*								pointer;
 		typedef T&								reference;
@@ -28,7 +28,7 @@ namespace ft{
 	template<class T>
 	class iterator_traits<const T*> {
 	public:
-		typedef ptrdiff_t						difference_type;
+		typedef std::ptrdiff_t					difference_type;
 		typedef T								value_type;
 		typedef const T*						pointer;
 		typedef const T&						reference;
@@ -144,42 +144,7 @@ namespace ft{
 		node			*_prev;
 	};
 
-	template <class Key, class T>
-	struct __base{
-	private:
-		typedef std::pair<const Key, T>						value_type;
-		typedef __base<Key, T>						map_node;
 
-		__base(): parent(NULL), left(NULL), right(NULL), isRed(false) {}
-
-	public:
-		value_type		data;
-		map_node		*parent;
-		map_node		*left;
-		map_node		*right;
-		bool 			isRed;
-
-		__base(map_node* nill, const value_type& data):
-		data(data),
-		parent(nill),
-		left(nill),
-		right(nill),
-		isRed(false) {}
-	};
-
-	template <class K, class T>
-	__base<K, T>* 	get_min(__base<K, T>* node, const __base<K, T>* nill){
-		while (node != nill && node->left != nill)
-			node = node->left;
-		return node;
-	}
-
-	template <class K, class T>
-	__base<K, T>* 	get_max(__base<K, T>* node, const __base<K, T>* nill){
-		while (node != nill && node->right != nill)
-			node = node->right;
-		return node;
-	}
 }
 
 

@@ -98,6 +98,9 @@
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/map/map.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/map/map_base.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/support_classes.hpp">
 			<Option target="ft_containers"/>
 		</Unit>

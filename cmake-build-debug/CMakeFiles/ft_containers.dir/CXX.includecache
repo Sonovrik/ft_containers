@@ -11,13 +11,25 @@ support_classes.hpp
 /Users/lmidori/Desktop/ft_containers/support_classes.hpp
 
 /Users/lmidori/Desktop/ft_containers/map/MapIterator.hpp
-../support_classes.hpp
-/Users/lmidori/Desktop/ft_containers/support_classes.hpp
+map_base.hpp
+/Users/lmidori/Desktop/ft_containers/map/map_base.hpp
 
 /Users/lmidori/Desktop/ft_containers/map/main.cpp
 map.hpp
 /Users/lmidori/Desktop/ft_containers/map/map.hpp
 map
+-
+iostream
+-
+sstream
+-
+algorithm
+-
+cstdlib
+-
+ctime
+-
+iomanip
 -
 
 /Users/lmidori/Desktop/ft_containers/map/map.hpp
@@ -31,6 +43,12 @@ MapIterator.hpp
 /Users/lmidori/Desktop/ft_containers/map/MapIterator.hpp
 ../ReverseIterator.hpp
 /Users/lmidori/Desktop/ft_containers/ReverseIterator.hpp
+map_base.hpp
+/Users/lmidori/Desktop/ft_containers/map/map_base.hpp
+
+/Users/lmidori/Desktop/ft_containers/map/map_base.hpp
+iostream
+-
 
 /Users/lmidori/Desktop/ft_containers/support_classes.hpp
 iostream
