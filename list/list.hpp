@@ -66,8 +66,8 @@ namespace ft {
 		list(const list &x) :
 				_allocator(x._allocator),
 				_nodeAllocator(x._nodeAllocator),
-				_size(0),
-				_root(NULL) {
+				_root(NULL),
+				_size(0) {
 			_insetBeginning();
 			iterator it = x.begin();
 			while (it != x.end()) {

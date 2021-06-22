@@ -13,16 +13,16 @@ include_directories(vector)
 
 
 add_executable(ft_containers
-        vector/vector.hpp
-        vector/main.cpp
-        vector/VectorIterator.hpp
+#        vector/vector.hpp
+#        vector/main.cpp
+#        vector/VectorIterator.hpp
 #        support_classes.hpp
-#        list/list.hpp
+        list/list.hpp
 #        list/main.cpp
-#        list/ListIterator.hpp
+        list/ListIterator.hpp
 #        ReverseIterator.hpp
-#        stack/stack.hpp
-#        stack/main.cpp
+        stack/stack.hpp
+        stack/main.cpp
 #        queue/queue.hpp
 #        queue/main.cpp
 #        map/map.hpp

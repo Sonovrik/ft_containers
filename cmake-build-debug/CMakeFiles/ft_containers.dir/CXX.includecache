@@ -6,41 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/Users/lmidori/Desktop/ft_containers/ReverseIterator.hpp
-support_classes.hpp
-/Users/lmidori/Desktop/ft_containers/support_classes.hpp
-
-/Users/lmidori/Desktop/ft_containers/support_classes.hpp
+/Users/lmidori/Desktop/ft_containers/stack/main.cpp
+stack.hpp
+/Users/lmidori/Desktop/ft_containers/stack/stack.hpp
+stack
+-
 iostream
 -
 
-/Users/lmidori/Desktop/ft_containers/vector/VectorIterator.hpp
-../support_classes.hpp
-/Users/lmidori/Desktop/ft_containers/support_classes.hpp
-
-/Users/lmidori/Desktop/ft_containers/vector/main.cpp
-vector.hpp
-/Users/lmidori/Desktop/ft_containers/vector/vector.hpp
-iostream
+/Users/lmidori/Desktop/ft_containers/stack/stack.hpp
+deque
 -
-sstream
--
-algorithm
--
-vector
--
-cstdlib
--
-ctime
--
-iomanip
--
-
-/Users/lmidori/Desktop/ft_containers/vector/vector.hpp
-iostream
--
-VectorIterator.hpp
-/Users/lmidori/Desktop/ft_containers/vector/VectorIterator.hpp
-../ReverseIterator.hpp
-/Users/lmidori/Desktop/ft_containers/ReverseIterator.hpp
 

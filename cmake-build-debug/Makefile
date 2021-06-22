@@ -142,32 +142,32 @@ ft_containers/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/build
 .PHONY : ft_containers/fast
 
-vector/main.o: vector/main.cpp.o
+stack/main.o: stack/main.cpp.o
 
-.PHONY : vector/main.o
+.PHONY : stack/main.o
 
 # target to build an object file
-vector/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/vector/main.cpp.o
-.PHONY : vector/main.cpp.o
+stack/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/stack/main.cpp.o
+.PHONY : stack/main.cpp.o
 
-vector/main.i: vector/main.cpp.i
+stack/main.i: stack/main.cpp.i
 
-.PHONY : vector/main.i
+.PHONY : stack/main.i
 
 # target to preprocess a source file
-vector/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/vector/main.cpp.i
-.PHONY : vector/main.cpp.i
+stack/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/stack/main.cpp.i
+.PHONY : stack/main.cpp.i
 
-vector/main.s: vector/main.cpp.s
+stack/main.s: stack/main.cpp.s
 
-.PHONY : vector/main.s
+.PHONY : stack/main.s
 
 # target to generate assembly for a file
-vector/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/vector/main.cpp.s
-.PHONY : vector/main.cpp.s
+stack/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/stack/main.cpp.s
+.PHONY : stack/main.cpp.s
 
 # Help Target
 help:
@@ -178,9 +178,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ft_containers"
-	@echo "... vector/main.o"
-	@echo "... vector/main.i"
-	@echo "... vector/main.s"
+	@echo "... stack/main.o"
+	@echo "... stack/main.i"
+	@echo "... stack/main.s"
 .PHONY : help
 
 
