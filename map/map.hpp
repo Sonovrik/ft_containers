@@ -41,7 +41,6 @@ namespace ft {
 
 		protected:
 			key_compare comp;
-
 			value_compare(key_compare c) : comp(c) { }
 
 		public:

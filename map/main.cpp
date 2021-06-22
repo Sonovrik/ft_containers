@@ -41,8 +41,13 @@ void print_containers_params(const Container1 &sv, const Container2 &fv) {
 template <class Container>
 void print_container(const std::string &containername, const Container &container) {
 	std::cout << containername << " contains:";
-	for (typename Container::const_iterator it = container.begin(); it != container.end(); ++it)
+	int i = 0;
+	for (typename Container::const_iterator it = container.begin(); it != container.end(); ++it){
 		std::cout << ' ' << it->first;
+		if (i % 10 == 0)
+			std::cout << std::endl;
+		i++;
+	}
 	std::cout << std::endl;
 }
 
@@ -513,8 +518,8 @@ void map_tests() {
 		fmap4.erase(fmap4.begin(), fmap4.end());
 		is_equal(smap2, fmap2);
 
-		std::map<size_t, size_t> smap5;
-		ft::map<size_t, size_t> fmap5;
+		std::map<long long, long long> smap5;
+		ft::map<long long, long long> fmap5;
 		for (int i = 0; i < 1000; ++i) {
 			long long tm = rand() % 10000;
 			smap5.insert(std::make_pair(tm, i));
@@ -533,7 +538,32 @@ void map_tests() {
 			smap5.erase(-tm);
 			fmap5.erase(-tm);
 		}
-		is_equal(smap2, fmap2);
+
+
+		print_containers_params(fmap5, smap5);
+		print_container("\nstd: ", smap5);
+		print_container("\nft:  ", fmap5);
+
+		std::cout << CLR_WARN << "MAP TESTS  <<<<<<<<<<<<<<<<<<<<<<<<<<<                              " << CLR_RESET
+				  << std::endl;
+		int i = 0;
+		for (ft::map<long long, long long>::reverse_iterator it = fmap5.rbegin(); it != fmap5.rend(); it++){
+			std::cout << it->first << " ";
+			if (i % 10 == 0)
+				std::cout << std::endl;
+			i++;
+		}
+		std::cout << std::endl;
+
+		i = 0;
+		for (std::map<long long, long long>::reverse_iterator it = smap5.rbegin(); it != smap5.rend(); it++){
+			std::cout << it->first << " ";
+			if (i % 10 == 0)
+				std::cout << std::endl;
+			i++;
+		}
+		std::cout << std::endl;
+		is_equal(smap5, fmap5);
 	}
 	std::cout << CLR_WARN << "MAP TESTS DONE <<<<<<<<<<<<<<<<<<<<<<<<<<<                              " << CLR_RESET
 			  << std::endl;

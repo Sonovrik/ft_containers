@@ -10,25 +10,27 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 include_directories(list)
 include_directories(utils)
 include_directories(vector)
+include_directories(map)
+include_directories(queue)
+include_directories(stack)
+
 
 
 add_executable(ft_containers
-#        vector/vector.hpp
-#        vector/main.cpp
-#        vector/VectorIterator.hpp
-#        support_classes.hpp
+        vector/vector.hpp
+        vector/VectorIterator.hpp
         list/list.hpp
-#        list/main.cpp
         list/ListIterator.hpp
-#        ReverseIterator.hpp
         stack/stack.hpp
-        stack/main.cpp
-#        queue/queue.hpp
-#        queue/main.cpp
-#        map/map.hpp
-#        map/main.cpp
-#        map/MapIterator.hpp
+        queue/queue.hpp
+        map/map.hpp
+        map/MapIterator.hpp
         support_classes.hpp
         ReverseIterator.hpp
-#        map/map_base.hpp
+        map/map_base.hpp
+#        list/main.cpp
+#        vector/main.cpp
+#        stack/main.cpp
+#        queue/main.cpp
+        map/main.cpp
         )

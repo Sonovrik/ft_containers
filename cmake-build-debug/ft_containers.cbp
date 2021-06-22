@@ -47,6 +47,9 @@
 					<Add directory="/Users/lmidori/Desktop/ft_containers/list"/>
 					<Add directory="/Users/lmidori/Desktop/ft_containers/utils"/>
 					<Add directory="/Users/lmidori/Desktop/ft_containers/vector"/>
+					<Add directory="/Users/lmidori/Desktop/ft_containers/map"/>
+					<Add directory="/Users/lmidori/Desktop/ft_containers/queue"/>
+					<Add directory="/Users/lmidori/Desktop/ft_containers/stack"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
@@ -71,6 +74,9 @@
 					<Add directory="/Users/lmidori/Desktop/ft_containers/list"/>
 					<Add directory="/Users/lmidori/Desktop/ft_containers/utils"/>
 					<Add directory="/Users/lmidori/Desktop/ft_containers/vector"/>
+					<Add directory="/Users/lmidori/Desktop/ft_containers/map"/>
+					<Add directory="/Users/lmidori/Desktop/ft_containers/queue"/>
+					<Add directory="/Users/lmidori/Desktop/ft_containers/stack"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
@@ -95,13 +101,31 @@
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/list/list.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/stack/main.cpp">
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/map/MapIterator.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/map/main.cpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/map/map.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/map/map_base.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/queue/queue.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/stack/stack.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/support_classes.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/vector/VectorIterator.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/vector/vector.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/CMakeLists.txt">
