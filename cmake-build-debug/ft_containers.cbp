@@ -89,19 +89,16 @@
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/ReverseIterator.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/map/MapIterator.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/map/main.cpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/map/map.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/lmidori/Desktop/ft_containers/map/map_base.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/support_classes.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/vector/VectorIterator.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/vector/main.cpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/lmidori/Desktop/ft_containers/vector/vector.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/lmidori/Desktop/ft_containers/CMakeLists.txt">
