@@ -10,33 +10,33 @@
 #include <iomanip>
 #include <cmath>
 
-#define	CLR_GOOD	"\033[1;32m"
-#define	CLR_ERROR	"\033[41;30m"
-#define	CLR_WARN	"\033[48;5;202m\033[38;5;0m"
-#define	CLR_RESET	"\033[0m"
+#define    CLR_GOOD    "\033[1;32m"
+#define    CLR_ERROR    "\033[41;30m"
+#define    CLR_WARN    "\033[48;5;202m\033[38;5;0m"
+#define    CLR_RESET    "\033[0m"
 
-bool single_digit (const int& value) { return (value<10); }
+bool single_digit(const int &value) { return (value < 10); }
+
 struct is_near {
-	bool operator() (double first, double second)
-	{ return (fabs(first-second)<5.0); }
+	bool operator()(double first, double second) { return (fabs(first - second) < 5.0); }
 };
 
-template<typename T>
-bool compare(const T &x, const T& y) {
+template <typename T>
+bool compare(const T &x, const T &y) {
 	return (x < y);
 }
 
 template <class Iterator>
-void		print_container(const std::string& containername, Iterator first, Iterator last) {
+void print_container(const std::string &containername, Iterator first, Iterator last) {
 	std::cout << containername << " contains:";
-	while (first != last){
+	while (first != last) {
 		std::cout << ' ' << *first;
 		++first;
 	}
 	std::cout << std::endl;
 }
 
-void print_4 (std::list<int> &b, std::list<int> &bb, ft::list<int> &a, ft::list<int> &aa) {
+void print_4(std::list<int> &b, std::list<int> &bb, ft::list<int> &a, ft::list<int> &aa) {
 	std::cout << "std::list: size(b) " << b.size() << std::endl;
 	std::cout << "std::list: size(bb) " << bb.size() << std::endl;
 	std::cout << "ft::list: size(a) " << a.size() << std::endl;
@@ -67,20 +67,20 @@ void print_4 (std::list<int> &b, std::list<int> &bb, ft::list<int> &a, ft::list<
 }
 
 template <class Container1, class Container2>
-void		print_containers_params(const Container1& sv, const Container2& fv) {
+void print_containers_params(const Container1 &sv, const Container2 &fv) {
 	std::cout << "size:     " << sv.size() << " = " << fv.size() << std::endl;
 }
 
 template <class Container>
-void		print_container(const std::string& containername, Container& container) {
+void print_container(const std::string &containername, Container &container) {
 	std::cout << containername << " contains:";
 	for (typename Container::iterator it = container.begin(); it != container.end(); ++it)
 		std::cout << ' ' << *it;
 	std::cout << std::endl;
 }
 
-void		error_exception() {
-	std::string	msg;
+void error_exception() {
+	std::string msg;
 	msg.append(CLR_ERROR);
 	msg.append("FAIL!!!");
 	msg.append(CLR_RESET);
@@ -89,25 +89,25 @@ void		error_exception() {
 }
 
 template <typename T>
-bool 		check_lists(const std::list<T>& sc, const ft::list<T>& fc){
+bool check_lists(const std::list<T> &sc, const ft::list<T> &fc) {
 	typename std::list<T>::const_iterator sic = sc.begin();
 	typename ft::list<T>::const_iterator fic = fc.begin();
 
-	while (sic != sc.end()){
-		if (*sic != *fic){
+	while (sic != sc.end()) {
+		if (*sic != *fic) {
 			return false;
 		}
 		fic++;
 		sic++;
 	}
-	if (fic != fc.end()){
+	if (fic != fc.end()) {
 		return false;
 	}
 	return true;
 }
 
 template <class Container1, class Container2>
-void		is_equal(const Container1& sc, const Container2& fc) {
+void is_equal(const Container1 &sc, const Container2 &fc) {
 	if (check_lists(sc, fc))
 		std::cout << CLR_GOOD << "containers are equal" << CLR_RESET << std::endl;
 	else {
@@ -115,14 +115,16 @@ void		is_equal(const Container1& sc, const Container2& fc) {
 		error_exception();
 	}
 }
-void	list_tests(){
-	std::cout << CLR_WARN << "LIST TESTS <<<<<<<<<<<<<<<<<<<<<<<<<<<                              " << CLR_RESET << std::endl;
+
+void list_tests() {
+	std::cout << CLR_WARN << "LIST TESTS <<<<<<<<<<<<<<<<<<<<<<<<<<<                              " << CLR_RESET
+			  << std::endl;
 
 	std::cout << "\nTEST 1" << std::endl;
 	{
 		ft::list<int> flis;
 		std::list<int> slis;
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			flis.push_back(i * 11);
 			slis.push_back(i * 11);
 		}
@@ -131,7 +133,7 @@ void	list_tests(){
 		print_container("ft:  ", flis);
 		is_equal(slis, flis);
 
-		for (int i = 0; i < 5; ++i){
+		for (int i = 0; i < 5; ++i) {
 			flis.pop_back();
 			slis.pop_back();
 		}
@@ -140,7 +142,7 @@ void	list_tests(){
 		print_container("ft:  ", flis);
 		is_equal(slis, flis);
 
-		for (int i = 0; i < 5; ++i){
+		for (int i = 0; i < 5; ++i) {
 			flis.push_front(i);
 			slis.push_front(i);
 		}
@@ -149,7 +151,7 @@ void	list_tests(){
 		print_container("ft:  ", flis);
 		is_equal(slis, flis);
 
-		for (int i = 0; i < 5; ++i){
+		for (int i = 0; i < 5; ++i) {
 			flis.pop_front();
 			slis.pop_front();
 		}
@@ -169,7 +171,7 @@ void	list_tests(){
 	{
 		ft::list<int> flis;
 		std::list<int> slis;
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			flis.push_back(i * 11);
 			slis.push_back(i * 11);
 		}
@@ -179,8 +181,8 @@ void	list_tests(){
 		std::list<int>::iterator sit2 = slis.begin();
 
 
-		fit  = fit2;
-		sit  = sit2;
+		fit = fit2;
+		sit = sit2;
 
 		if (fit != fit2)
 			error_exception();
@@ -206,7 +208,7 @@ void	list_tests(){
 	{
 		ft::list<int> flis;
 		std::list<int> slis;
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			flis.push_back(i * 11);
 			slis.push_back(i * 11);
 		}
@@ -227,18 +229,18 @@ void	list_tests(){
 	{
 		ft::list<int> flis;
 		std::list<int> slis;
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			flis.push_back(i);
 			slis.push_back(i);
 		}
 
-		for (int i = 0; i < 3; ++i){
+		for (int i = 0; i < 3; ++i) {
 			flis.insert(flis.end(), -2);
 			slis.insert(slis.end(), -2);
 		}
 
-		flis.insert(++flis.begin(), 3,10);
-		slis.insert(++slis.begin(), 3,10);
+		flis.insert(++flis.begin(), 3, 10);
+		slis.insert(++slis.begin(), 3, 10);
 		print_containers_params(slis, flis);
 		print_container("ft:  ", flis);
 		print_container("std: ", slis);
@@ -246,7 +248,7 @@ void	list_tests(){
 
 		ft::list<int> flis2;
 		std::list<int> slis2;
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			flis2.push_back(-i);
 			slis2.push_back(-i);
 		}
@@ -273,7 +275,7 @@ void	list_tests(){
 	{
 		ft::list<int> flis;
 		std::list<int> slis;
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			flis.push_back(i);
 			slis.push_back(i);
 		}
@@ -294,7 +296,7 @@ void	list_tests(){
 
 		ft::list<std::string> flis2;
 		std::list<std::string> slis2;
-		for (int i = 0; i <  10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			slis2.push_back("hello" + std::to_string(i));
 			flis2.push_back("hello" + std::to_string(i));
 		}
@@ -302,7 +304,7 @@ void	list_tests(){
 		ft::list<std::string>::iterator fit = flis2.begin();
 		std::list<std::string>::iterator sit = slis2.begin();
 
-		for (int i = 0; i < 4; ++i){
+		for (int i = 0; i < 4; ++i) {
 			++fit;
 			++sit;
 		}
@@ -330,7 +332,7 @@ void	list_tests(){
 	{
 		ft::list<int> flis;
 		std::list<int> slis;
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			flis.push_back(i);
 			slis.push_back(i);
 		}
@@ -366,22 +368,22 @@ void	list_tests(){
 	{
 		ft::list<int> flis;
 		std::list<int> slis;
-		for (int i = 0; i < 3; ++i){
+		for (int i = 0; i < 3; ++i) {
 			flis.push_back(i);
 			slis.push_back(i);
 		}
 
-		for (int i = 0; i < 3; ++i){
+		for (int i = 0; i < 3; ++i) {
 			flis.push_back(i * 2);
 			slis.push_back(i * 2);
 		}
 
-		for (int i = 0; i < 3; ++i){
+		for (int i = 0; i < 3; ++i) {
 			flis.push_back(i);
 			slis.push_back(i);
 		}
 
-		for (int i = 0; i < 3; ++i){
+		for (int i = 0; i < 3; ++i) {
 			flis.push_back(i * 2);
 			slis.push_back(i * 2);
 		}
@@ -415,7 +417,7 @@ void	list_tests(){
 	{
 		ft::list<int> flis;
 		std::list<int> slis;
-		for (int i = 0; i < 5; ++i){
+		for (int i = 0; i < 5; ++i) {
 			flis.push_back(1);
 			flis.push_back(2);
 			slis.push_back(1);
@@ -428,7 +430,7 @@ void	list_tests(){
 		flis.unique();
 		slis.unique();
 
-		for (int i = 0; i < 5; ++i){
+		for (int i = 0; i < 5; ++i) {
 			flis.push_back(1);
 			slis.push_back(1);
 		}
@@ -439,7 +441,7 @@ void	list_tests(){
 		print_container("std: ", slis);
 		is_equal(slis, flis);
 
-		for (int i = 0; i < 5; ++i){
+		for (int i = 0; i < 5; ++i) {
 			flis.push_back(66);
 			slis.push_back(66);
 		}
@@ -453,7 +455,7 @@ void	list_tests(){
 		print_container("std: ", slis);
 		is_equal(slis, flis);
 
-		for (int i = 0; i < 5; ++i){
+		for (int i = 0; i < 5; ++i) {
 			flis.push_front(77);
 			slis.push_front(77);
 		}
@@ -479,7 +481,7 @@ void	list_tests(){
 		print_container("std: ", slis);
 		is_equal(slis, flis);
 
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			flis.push_back(i);
 			slis.push_back(i);
 		}
@@ -500,7 +502,7 @@ void	list_tests(){
 		std::list<int> slis;
 		std::list<int> sli2;
 		ft::list<int> fli2;
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			flis.push_back(i);
 			sli2.push_back(-i);
 			fli2.push_back(-i);
@@ -516,7 +518,7 @@ void	list_tests(){
 
 		flis.clear();
 		slis.clear();
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			sli2.push_back(-i);
 			fli2.push_back(-i);
 		}
@@ -529,7 +531,7 @@ void	list_tests(){
 		print_containers_params(slis, flis);
 		is_equal(slis, flis);
 
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			sli2.push_back(i * 20);
 			fli2.push_back(i * 20);
 		}
@@ -543,14 +545,14 @@ void	list_tests(){
 
 		flis.clear();
 		slis.clear();
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			sli2.push_back(i * 20);
 			fli2.push_back(i * 20);
 		}
 
 		std::list<int>::iterator sit = sli2.begin();
 		ft::list<int>::iterator fit = fli2.begin();
-		for (int i = 0; i < 4; ++i){
+		for (int i = 0; i < 4; ++i) {
 			sit++;
 			fit++;
 		}
@@ -633,7 +635,7 @@ void	list_tests(){
 		a.splice(beg2, aa);
 
 		std::cout << "После вызова: " << std::endl;
-		print_4 (b, bb, a, aa);
+		print_4(b, bb, a, aa);
 	}
 	{
 		ft::list<int> a;
@@ -706,7 +708,7 @@ void	list_tests(){
 		a.splice(beg2, aa, beg4);
 
 		std::cout << "После вызова: " << std::endl;
-		print_4 (b, bb, a, aa);
+		print_4(b, bb, a, aa);
 	}
 	std::cout << "\nTEST 12 merge" << std::endl;
 	{
@@ -715,7 +717,7 @@ void	list_tests(){
 		ft::list<int> flis2;
 		std::list<int> slis2;
 
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			flis.push_back(i);
 			slis.push_back(i);
 			flis2.push_back(i * 10);
@@ -733,7 +735,7 @@ void	list_tests(){
 	{
 		ft::list<int> flis;
 		std::list<int> slis;
-		for (int i = 0; i < 10; ++i){
+		for (int i = 0; i < 10; ++i) {
 			flis.push_back(-i);
 			slis.push_back(-i);
 		}
@@ -778,13 +780,13 @@ void	list_tests(){
 
 		std::cout << "До вызова: " << std::endl;
 
-		print_4 (b, bb, a, aa);
+		print_4(b, bb, a, aa);
 
 		a.merge(aa);
 		b.merge(bb);
 
 		std::cout << "После вызова: " << std::endl;
-		print_4 (b, bb, a, aa);
+		print_4(b, bb, a, aa);
 	}
 	{
 
@@ -824,13 +826,13 @@ void	list_tests(){
 
 		std::cout << "До вызова: " << std::endl;
 
-		print_4 (b, bb, a, aa);
+		print_4(b, bb, a, aa);
 
 		a.merge(aa, compare<int>);
 		b.merge(bb, compare<int>);
 
 		std::cout << "После вызова: " << std::endl;
-		print_4 (b, bb, a, aa);
+		print_4(b, bb, a, aa);
 	}
 	std::cout << "\nTEST 14 operations" << std::endl;
 	{
@@ -920,11 +922,12 @@ void	list_tests(){
 		std::cout << "std::list >= " << (b >= bb) << std::endl;
 		std::cout << "------------------" << std::endl;
 	}
-	std::cout << CLR_WARN << "LIST TESTS DONE <<<<<<<<<<<<<<<<<<<<<<<<<<<                              " << CLR_RESET << std::endl;
+	std::cout << CLR_WARN << "LIST TESTS DONE <<<<<<<<<<<<<<<<<<<<<<<<<<<                              " << CLR_RESET
+			  << std::endl;
 }
 
 
-int 	main(){
+int main() {
 
 	list_tests();
 	return 0;
