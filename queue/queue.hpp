@@ -32,36 +32,35 @@ namespace ft {
 		void push(const value_type &val) { c.push_back(val); }
 
 		void pop() { c.pop_front(); }
+
+		friend
+		bool operator==(const queue<T, Container> &lhs, const queue<T, Container> &rhs) {
+			return (lhs.c == rhs.c);
+		}
+
+		friend
+		bool operator!=(const queue<T, Container> &lhs, const queue<T, Container> &rhs) {
+			return !(lhs == rhs);
+		}
+
+		friend
+		bool operator<(const queue<T, Container> &lhs, const queue<T, Container> &rhs) {
+			return (lhs.c < rhs.c);
+		}
+
+		friend
+		bool operator<=(const queue<T, Container> &lhs, const queue<T, Container> &rhs) {
+			return !(rhs < lhs);
+		}
+
+		friend
+		bool operator>(const queue<T, Container> &lhs, const queue<T, Container> &rhs) {
+			return (rhs < lhs);
+		}
+
+		friend
+		bool operator>=(const queue<T, Container> &lhs, const queue<T, Container> &rhs) {
+			return !(lhs < rhs);
+		}
 	};
-
-	template <class T, class Container>
-	bool operator==(const queue<T, Container> &lhs, const queue<T, Container> &rhs) {
-		return (lhs.c == rhs.c);
-	}
-
-	template <class T, class Container>
-	bool operator!=(const queue<T, Container> &lhs, const queue<T, Container> &rhs) {
-		return !(lhs == rhs);
-	}
-
-	template <class T, class Container>
-	bool operator<(const queue<T, Container> &lhs, const queue<T, Container> &rhs) {
-		return (lhs.c < rhs.c);
-	}
-
-	template <class T, class Container>
-	bool operator<=(const queue<T, Container> &lhs, const queue<T, Container> &rhs) {
-		return !(rhs < lhs);
-	}
-
-	template <class T, class Container>
-	bool operator>(const queue<T, Container> &lhs, const queue<T, Container> &rhs) {
-		return (rhs < lhs);
-	}
-
-	template <class T, class Container>
-	bool operator>=(const queue<T, Container> &lhs, const queue<T, Container> &rhs) {
-		return !(lhs < rhs);
-	}
-
 }
